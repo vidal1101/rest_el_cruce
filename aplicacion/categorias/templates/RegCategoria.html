@@ -1,0 +1,95 @@
+{% extends "Base.html" %} {% block content %} {{ super() }}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb col-md-5 mt-5 ml-2">
+            <li class="breadcrumb-item"><a href="/inicio">Menú principal</a></li>
+            <li class="breadcrumb-item"><a href="/inventario">Inventario</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Registrar Categoría</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-center">{{texto}}</h1>
+
+    <div class="row">
+        <div class="col-12 col-md-6 mx-auto">
+            {% for categoria in contact %}
+            <form class="needs-validation" action="InsertCategorias?idcategoria={{categoria.0}}" method="POST"
+                enctype="multipart/form-data" novalidate>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre" value="{{categoria.1}}"
+                            required>
+                        <div class="invalid-feedback">
+                            Ingrese el nombre de la categroría.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="estado">Estado</label>
+                        <select class="custom-select" name="estado" id="estado" required>
+                            <option selected disabled>Seleccionar...</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Seleccion un estado.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-12  mb-3">
+                        <label for="foto">Subir imagen</label>
+                        <input type="file" accept="image/*" class="form-control" name="imagen" id="foto">
+                        <div class="valid-feedback">
+                            Foto es opcional...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-12  mb-3">
+                        <label for="descripcion">Descripción</label>
+                        <textarea type="text" class="form-control" name="descripcion" id="descripcion"
+                            required>{{categoria.2}}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-6 mb-3">
+                        <button class="btn btn-primary btn-lg col-12" value="{{btn}}" name="btn"
+                            type="submit">{{btntext}}</button>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <a href="/inventario" class="btn btn-danger btn-lg col-12">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+{% endblock %}

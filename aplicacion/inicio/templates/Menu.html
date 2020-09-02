@@ -1,0 +1,124 @@
+{% extends "Menu-Bar.html" %} {% block content %} {{ super() }}
+<div class="container-fluid mt-5">
+    <div class="row">
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <!-- Opciones de perfiles -->
+            <div class="card mx-auto" style="width: 23rem; margin: 5px;">
+                <div class="row no-gutters">
+                    <img src="static/img/usuarios-icon.png" alt="IMAGEN" class="col-5 card-img p-3">
+                    <div class="col-7 card-body">
+                        <h5 class="card-title"> Usuarios </h5>
+                        <p class="card-text">
+                            Consultar, crear, eliminar o modificar usuarios.
+                        </p>
+                        <a href="/usuarios" class="btn btn-primary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mx-auto" style="width: 23rem; margin: 5px;">
+                <div class="row no-gutters">
+                    <img src="static/img/proveedores-icon.png" class="col-5 card-img p-3" alt="IMAGEN">
+                    <div class="col-7 card-body">
+                        <h5 class="card-title"> Proveedores </h5>
+                        <p class="card-text">
+                            Consultar, crear, eliminar o modificar proveedores.
+                        </p>
+                        <a href="/proveedores" class="btn btn-primary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mx-auto" style="width: 23rem; margin: 5px;">
+                <div class="row no-gutters">
+                    <img src="static/img/clientes-icon.png" class="col-5 card-img p-3" alt="IMAGEN">
+                    <div class="col-7 card-body">
+                        <h5 class="card-title"> Clientes </h5>
+                        <p class="card-text">
+                            Consultar, crear, eliminar o modificar clientes que requieren Factura electrónica.
+                        </p>
+                        <a href="/Mostrarclientes" class="btn btn-primary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <!-- Opciones de caja y de contablidad -->
+
+            <div class="card mx-auto" style="width: 23rem; margin: 5px;">
+                <div class="row no-gutters">
+                    <img src="static/img/caja-icon.png" class="col-5 card-img p-3" alt="IMAGEN">
+                    <div class="col-7 card-body">
+                        <h5 class="card-title"> Caja </h5>
+                        <p class="card-text">
+                            Abrir, cerrar caja y facturar proformas.
+                        </p>
+                        <a href="/caja" class="btn btn-primary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mx-auto" style="width: 23rem; margin: 5px;">
+                <div class="row no-gutters">
+                    <img src="..." class="col-5 card-img p-3" alt="IMAGEN">
+                    <div class="col-7 card-body">
+                        <h5 class="card-title"> Contabilidad </h5>
+                        <p class="card-text">
+                            Consultar ingresos, gastos y comisiones.
+                        </p>
+                        <a href="/#Contabilidad" class="btn btn-primary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <!-- Opciones de Inventario, facturas y cuentas -->
+            <div class="card mx-auto" style="width: 23rem; margin: 5px;">
+                <div class="row no-gutters">
+                    <img src="static/img/inventario-icon.png" class="col-5 card-img p-3" alt="IMAGEN">
+                    <div class="col-7 card-body">
+                        <h5 class="card-title"> Inventario </h5>
+                        <p class="card-text">
+                            Consulta, agrega, modifica y desactiva productos por medio de categorías.
+                        </p>
+                        <a href="/inventario" class="btn btn-primary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mx-auto" style="width: 23rem; margin: 5px;">
+                <div class="row no-gutters">
+                    <img src="static/img/facturas-icon.png" class="col-5 card-img p-3" alt="IMAGEN">
+                    <div class="col-7 card-body">
+                        <h5 class="card-title"> Facturas </h5>
+                        <p class="card-text">
+                            Consulta por diferentes fechas y anula facturas. (Para facturar debes ir a la opción Caja.)
+                        </p>
+                        <a href="/#facturas" class="btn btn-primary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mx-auto" style="width: 23rem; margin: 5px;">
+                <div class="row no-gutters">
+                    <img src="static/img/cuentas-icon.png" class="col-5 card-img p-3" alt="IMAGEN">
+                    <div class="col-7 card-body">
+                        <h5 class="card-title"> Cuentas </h5>
+                        <p class="card-text">
+                            Consulta cuentas por pagar y por cobrar tanto de Clientes como Proveedores.
+                        </p>
+                        <a href="/#cuentas" class="btn btn-primary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
