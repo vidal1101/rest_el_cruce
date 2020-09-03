@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect
 from . import categorias, controller
 
+@categorias.route('/categorias', methods=['GET', 'POST'])
 @categorias.route('/inventario', methods=['GET', 'POST'])
 def mostrar_categorias():
     datos = controller.mostrar_categorias()
@@ -24,7 +25,7 @@ def guardar_categoria():
         redirect('inventario')
     return redirect('inventario')
 
-@categorias.route('/cambiar-estado', methods=['GET', 'POST'])
+@categorias.route('/cambiar-estado-categoria', methods=['GET', 'POST'])
 def actualizar_estado():
     idcate = request.args.get("id")
     controller.cambiar_estado(idcate)

@@ -174,3 +174,20 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_verEstadoCajas`()
+BEGIN
+	DECLARE numUltimoCaja int(11);
+    set numUltimoCaja = (select max(idCaja) as num_Caja   from Caja );
+    
+    if exists(select idCaja , idTrabajador, estado from Caja where idCaja = numUltimoCaja  
+		and estado ='abierta' ) then
+  
+			select 'cajaAbierta',numUltimoCaja;
+	else 
+			select 'cajaCerrada',numUltimoCaja;
+   end if;
+    
+END$$
+DELIMITER ;

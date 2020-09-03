@@ -1,6 +1,10 @@
 import pymysql
 
 class Mysql():
+    """
+        Clase utilizada para conectarse a la base de datos MYSQL.
+        - Se requiere la librería pymysql.
+    """
     __instance = None
     __host = None
     __user = None
@@ -23,7 +27,6 @@ class Mysql():
         self.__database = database
       
 
-    #Open connection with database
     def _open(self):
         try:
             cnx = pymysql.connect(host=self.__host, user=self.__user, password=self.__password,
@@ -50,7 +53,7 @@ class Mysql():
         #self.__connection.close()
         return datos
 
-    def Execute_Procedure(self, name, args):
+    def execute_procedure(self, name, args):
         try:
             self._open()
             self.__session.callproc(name, args)

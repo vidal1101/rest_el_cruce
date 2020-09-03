@@ -14,7 +14,7 @@ def registrar_categoria(request):
     conex = Mysql()
     foto = request.files['imagen']
     #Si tiene imagen que guardar, se realiza el procedimiento para guardar
-    if (foto != None):
+    if (foto != None): #
         nombre_foto = foto.filename
         if (nombre_foto != ''):
             foto_codificada = codificar_imagen(foto)
@@ -29,7 +29,7 @@ def modificar_categoria(request):
     """
         Se actualizan los campos de la categoría.
     """
-    idcate = request.args.get("id-categoria")
+    idcate = request.args.get("idcategoria")
     nombreCate = request.form['nombre']
     descrip = request.form['descripcion']
     estado = request.form['estado']

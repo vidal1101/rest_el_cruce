@@ -1,5 +1,111 @@
 {% extends "Menu-Bar.html" %} {% block content %} {{ super() }}
+<div class="container">
+    <div class="row border-bottom border-secondary mt-5">
+        <div class="col-12 col-md-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-5">
+                    <li class="breadcrumb-item"><a href="/inicio">Menú principal</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Contabilidad</li>
+                </ol>
+            </nav>
 
+            <p>Nota:
+                <em>
+                    Estos datos son de acuerdo al rango de fechas que se indiquen, no corresponde al total desde fechas
+                    anteriores o posteriores.
+                </em>
+            </p>
+        </div>
 
+        <div class="col-12 col-md-4 mt-5 mb-2 mx-auto">
+            <h4>Seleccione las fechas deseadas:</h4>
 
+            <form action="contabilidad" method="POST">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="inicio">Desde: </label>
+                        <input class="form-control" id="inicio" name="fecha-inicio" type="date">
+                    </div>
+                    <div class="col">
+                        <label for="final">Hasta: </label>
+                        <input class="form-control" id="final" name="fecha-final" type="date">
+                    </div>
+                </div>
+
+                <button class="btn btn-success col-12 mt-3" type="submit">Calular</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-6 col-md-6 border-right border-secondary">
+            <h2 class="text-center"><span class="badge badge-secondary">Ingresos</span></h2>
+
+            <ul class="list-group">
+                <li class="list-group-item">Cantidad de ventas:
+                    <span class="badge badge-secondary">
+                        <h5>0</h5>
+                    </span>
+                </li>
+                <li class="list-group-item">Promedio de ventas:
+                    <span class="badge badge-secondary">
+                        <h5>0</h5>
+                    </span>
+                </li>
+                <li class="list-group-item">Ingreso en ventas:
+                    <span class="badge badge-secondary">
+                        <h5>¢0.00</h5>
+                    </span>
+                </li>
+                <li class="list-group-item">10% de todas las ventas en mesa:
+                    <span class="badge badge-secondary">
+                        <h5>¢0.00</h5>
+                    </span>(validar)
+                </li>
+            </ul>
+
+            <!-- a href="facturas-ventas" class="btn btn-warning mt-2">Ver Facturas de las ventas</a -->
+
+        </div>
+
+        <div class="col-6 col-md-6">
+            <h2 class="text-center"><span class="badge badge-secondary">Gastos</span></h2>
+
+            <ul class="list-group">
+                <li class="list-group-item">Cantidad de compras:
+                    <span class="badge badge-secondary">
+                        <h5>0</h5>
+                    </span>
+                </li>
+                <li class="list-group-item">Promedio de compras:
+                    <span class="badge badge-secondary">
+                        <h5>0</h5>
+                    </span>
+                </li>
+                <li class="list-group-item">Inversión en compras:
+                    <span class="badge badge-secondary">
+                        <h5>¢ 0.00</h5>
+                    </span>
+                </li>
+            </ul>
+
+            <!-- a href="facturas-compras" class="btn btn-warning mt-2">Ver Facturas de las compras</a -->
+
+        </div>
+
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12 ">
+            <ul class="list-group float-right">
+                <li class="list-group-item">Ingreso Neto:
+                    <span class="badge badge-secondary">
+                        <h5>¢ 0.0</h5>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
 {% endblock %}
