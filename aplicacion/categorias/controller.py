@@ -18,11 +18,11 @@ def registrar_categoria(request):
         nombre_foto = foto.filename
         if (nombre_foto != ''):
             foto_codificada = codificar_imagen(foto)
-            conex.Execute_Procedure("stp_insertar_categoria_foto",[nombre_categoria,descrip,estado, foto_codificada, nombre_foto])
+            conex.execute_procedure("stp_insertar_categoria_foto",[nombre_categoria,descrip,estado, foto_codificada, nombre_foto])
         else:
-            conex.Execute_Procedure("stp_insertarCategoria",[nombre_categoria,descrip,estado])
+            conex.execute_procedure("stp_insertarCategoria",[nombre_categoria,descrip,estado])
     else:
-        conex.Execute_Procedure("stp_insertarCategoria",[nombre_categoria,descrip,estado])
+        conex.execute_procedure("stp_insertarCategoria",[nombre_categoria,descrip,estado])
 
 # Reparar el metodo para modificar la categoria
 def modificar_categoria(request):
@@ -34,7 +34,7 @@ def modificar_categoria(request):
     descrip = request.form['descripcion']
     estado = request.form['estado']
     conex = Mysql()
-    conex.Execute_Procedure("stp_modificarCategoria",[idcate,nombreCate,descrip,estado])
+    conex.execute_procedure("stp_modificarCategoria",[idcate,nombreCate,descrip,estado])
     guardar_foto(request)
     
 def mostrar_categorias():
@@ -54,7 +54,7 @@ def cambiar_estado(idcate):
         Se cambia el estado de una categoría exclusivamente por su ID.
     """
     conex = Mysql()
-    conex.Execute_Procedure("stp_cambiarEstadoCategoria",[idcate]) 
+    conex.execute_procedure("stp_cambiarEstadoCategoria",[idcate]) 
 
 def mostrar_categoria(idcate): 
     """
@@ -77,7 +77,7 @@ def guardar_foto(request):
             print('----------------------> Imagen extraída: '+ nombre_foto)
             foto_codificada = codificar_imagen(foto)
             mysql = Mysql()
-            mysql.Execute_Procedure('stp_cambiar_foto_categoria',[idcategoria, foto_codificada, nombre_foto])               
+            mysql.execute_procedure('stp_cambiar_foto_categoria',[idcategoria, foto_codificada, nombre_foto])               
 
 def codificar_imagen(image):
     """
