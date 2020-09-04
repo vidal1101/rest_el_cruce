@@ -1,0 +1,164 @@
+{% extends "Menu-Bar.html" %} {% block content %} {{ super() }}
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb col-6 col-md-4 mt-5 ml-2">
+            <li class="breadcrumb-item"><a href="/inicio">Menú principal</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="inventario">Categorías</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Produtos</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+
+        <div class="col-12 col-md-10">
+            <h1 class="m-2">Productos</h1>
+            <!-- p>
+                Descripción de la categoría, donde se detalla la categoría.
+            </p -->
+        </div>
+    </div>
+    <!-- Opciones para gestionar los productos -->
+    <div class="row m-3">
+        <div class="col-12 col-md-5">
+            <a href="/registrar-producto" class="btn btn-success mb-2">
+                Registrar Producto
+            </a>
+            <!-- Filtros -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle mb-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Estado
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Activo</a>
+                    <a class="dropdown-item" href="#">Inactivo</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Cualquiera</a>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle mb-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ordenar por:
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">ID</a>
+                    <a class="dropdown-item" href="#">Nombre</a>
+                    <a class="dropdown-item" href="#">Prec. Venta</a>
+                    <a class="dropdown-item" href="#">Prec. Compra</a>
+                    <a class="dropdown-item" href="#">Utilidad</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12 col-md-7">
+            <div class="form-group mb-3">
+                <form action="/searh" method="POST">
+                    <div class="form-row">
+                        <div class="col-8 col-md-6">
+                            <input id="myInput" name="consulta" type="text" class="form-control" placeholder="Buscar producto...">
+                        </div>
+                        <div class="col-4 col-md-4">
+                            <button class="btn btn-primary" type="submit">Buscar</button>
+                        </div>
+                    </div>
+                    <!-- opciones de búsqueda -->
+                    <div class="form-row m-1">
+                        <div class="form-check form-check-inline">
+                            <small>Buscar por:</small>
+                        </div>
+                        <div class="form-check-inline custom-control custom-switch">
+                            <input class="custom-control-input" type="checkbox" id="id" value="id" name="id">
+                            <label class="custom-control-label" for="id">ID</label>
+                        </div>
+                        <div class="form-check-inline custom-control custom-switch">
+                            <input class="custom-control-input" type="checkbox" id="nombre" value="nombre" name="nombre">
+                            <label class="custom-control-label" for="nombre">Nombre</label>
+                        </div>
+                        <div class="form-check-inline custom-control custom-switch">
+                            <input class="custom-control-input" type="checkbox" id="utilidad" value="utilidad" name="utilidad">
+                            <label class="custom-control-label" for="utilidad">Utilidad</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla con los productos de la categoría actual -->
+    <div class="row m-2">
+        <div class="col-12">
+
+            <table class="table table-hover table-sm">
+                <caption>Productos registrados en el sistema.</caption>
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Compra</th>
+                        <th scope="col">Venta</th>
+                        <th scope="col">Utilidad</th>
+                        <th scope="col"> IVA </th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">A mano</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Desactivar</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    {% for producto in datos %}
+                    <tr>
+                        <th scope="row">{{producto.0}}</th>
+                        <td>{{producto.1}}</td>
+                        <td>{{producto.2}}</td>
+                        <td>{{producto.3}}</td>
+                        <td>{{producto.4}}</td>
+                        <td>{{producto.5}}</td>
+                        <td>{{producto.6}}%</td>
+                        <td>{{producto.7}}</td>
+                        <td>{{producto.8}}</td>
+                        <td>{{producto.9}}</td>
+                        <td>{{producto.10}}</td>
+                        <td>
+                            <a href="/modificar-producto?idproducto={{producto.0}}">
+                                <svg class="bi bi-pencil-square" width="32" height="32" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z">
+                                    </path>
+                                    <path fill-rule="evenodd"
+                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/cambiar-estado-producto?idproducto={{producto.0}}">
+                                <svg class="bi bi-trash" width="32" height="32" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                    <path fill-rule="evenodd"
+                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{% endblock %}

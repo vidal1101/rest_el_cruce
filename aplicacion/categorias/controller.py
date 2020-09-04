@@ -74,7 +74,6 @@ def guardar_foto(request):
         idcategoria = request.args.get('idcategoria')
         nombre_foto = foto.filename
         if (nombre_foto != ''):
-            print('----------------------> Imagen extraída: '+ nombre_foto)
             foto_codificada = codificar_imagen(foto)
             mysql = Mysql()
             mysql.execute_procedure('stp_cambiar_foto_categoria',[idcategoria, foto_codificada, nombre_foto])               
@@ -91,21 +90,16 @@ def codificar_imagen(image):
 
 def verificar_foto(nombre_foto, id_categoria):
     """
-        - Se obtiene la foto si está en el disco duro, 
+        Se obtiene la foto si está en el disco duro, 
         caso contrario obtiene el codificado BASE64 y la decodifica
         para escribirla en el disco duro.
     """
-    # Obtenemos la ruta de la foto
+    # Obtenemos la ruta de la foto en el disco duro...
     if (nombre_foto != None and nombre_foto != ''):
         ruta = '/home/dreads/Documentos/proyectos/software_restaurante/app_rest_blueprints/aplicacion/static/img/categorias/' + nombre_foto
-        
-        if (path.exists(ruta)):
-            print("----------------> Ya existe el archivo")
-        else:
-            print("----------------> No existe el archivo, entonces se extrae de la BD y se escribe nuevamente en el disco duro.")
+        if (path.exists(ruta) == False):
             foto_archivo = open(ruta, 'wb')
             mysql = Mysql()
-            
             # Obtenemos la foto codificada en Base64
             foto = mysql.call_store_procedure_return('stp_obtener_foto_categoria',[id_categoria])
             # Decodificamos la foto y la escribimos

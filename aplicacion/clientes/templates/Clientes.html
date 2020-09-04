@@ -1,0 +1,122 @@
+{% extends "Menu-Bar.html" %} {% block content %} {{ super() }}
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb col-6 col-md-4 mt-5 ml-2">
+            <li class="breadcrumb-item" aria-current="page">
+                <a href="/inicio">Menú Principal</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+        </ol>
+    </nav>
+    <h1>Clientes Registrados</h1>
+    <p>Nota: Estos clientes están porque únicamente han requerido factura electrónica.</p>
+
+    <div class="row">
+        <div class="col-12 col-md-3">
+            <!-- Botón de Nuevo y Campos Buscar -->
+            <a href="/registrar-cliente" class="btn btn-success">Registrar Cliente</a>
+        </div>
+
+        <div class="col-12 col-md-9">
+            <div class="form-group mb-3">
+                <form action="/searh" method="POST">
+                    <div class="form-row">
+                        <div class="col-8 col-md-6">
+                            <input name="consulta" id="myInput" type="text" class="form-control" placeholder="Buscar cliente...">
+                        </div>
+                        <div class="col-4 col-md-4">
+                            <button class="btn btn-primary" type="submit">Buscar</button>
+                        </div>
+                    </div>
+                    <!-- opciones de búsqueda -->
+                    <div class="form-row m-1">
+                        <div class="form-check form-check-inline">
+                            <small>Buscar por:</small>
+                        </div>
+                        <div class="form-check-inline custom-control custom-switch">
+                            <input class="custom-control-input" type="checkbox" id="nom" value="nombre" name="nombre">
+                            <label class="custom-control-label" for="nom">Nombre</label>
+                        </div>
+                        <div class="form-check-inline custom-control custom-switch">
+                            <input class="custom-control-input" type="checkbox" id="ced" value="cedula" name="cedula">
+                            <label class="custom-control-label" for="ced">Cédula</label>
+                        </div>
+                        <div class="form-check-inline custom-control custom-switch">
+                            <input class="custom-control-input" type="checkbox" id="empresa" value="emprsa" name="empresa">
+                            <label class="custom-control-label" for="empresa">Empresa</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mx-auto">
+            <!-- Tabla que muestra los proveedores registrados -->
+            <table class="table table-hover table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Cédula</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Empresa</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Observación</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Desactivar</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    <!-- Dinamico -->
+                    {% for indice in values %}
+                    <tr>
+
+                        <th scope="row">{{indice.0}}</th>
+                        <td> {{indice.1}} </td>
+                        <td> {{indice.2}} </td>
+                        <td> {{indice.3}} </td>
+                        <td> {{indice.4}} </td>
+                        <td> {{indice.5}} </td>
+
+                        <td>
+                            <a href="/modificar-cliente?idcliente={{indice.0}}">
+                                <svg class="bi bi-pencil-square" width="30" height="30" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z">
+                                    </path>
+                                    <path fill-rule="evenodd"
+                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/cambiar-estado-cliente?idcliente={{indice.0}}">
+                                <svg class="bi bi-trash" width="30" height="30" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                    <path fill-rule="evenodd"
+                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{% endblock %}
