@@ -1,13 +1,16 @@
 from flask import request, redirect, render_template
+from flask_login import login_required
 from . import proveedores, controller
 
 @proveedores.route('/proveedores', methods=['GET', 'POST'])
+@login_required
 def mostrar_proveedores(): 
     proveedores = controller.mostrar_proveedores()
     return render_template('Proveedores.html', values=proveedores)
 
 
 @proveedores.route('/guardar-proveedor', methods=['GET', 'POST'])
+@login_required
 def guardar_proveedor():
     try:
         btnvalor = request.form['btnpro']
@@ -24,6 +27,7 @@ def guardar_proveedor():
 
 
 @proveedores.route('/cambiar-estado-proveedor', methods=['GET', 'POST'])
+@login_required
 def cambiar_estado():
     cedula  = request.args.get('idproveedor')
     controller.cambiar_estado(cedula)
@@ -31,6 +35,7 @@ def cambiar_estado():
 
 
 @proveedores.route('/modificar-proveedor', methods=['GET','POST'])
+@login_required
 def modificar_proveedor():
     idproveedor = request.args.get('idproveedor')
     proveedor   = controller.obtener_proveedor(idproveedor)
@@ -42,6 +47,7 @@ def modificar_proveedor():
 
 
 @proveedores.route('/registrar-proveedor', methods=['GET', 'POST'])
+@login_required
 def registrar_proveedor(): 
     btn        = 'Nuevo'
     btn_text   = 'Guardar Proveedor '

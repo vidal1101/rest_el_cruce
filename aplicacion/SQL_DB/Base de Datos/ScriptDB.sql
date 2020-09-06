@@ -59,6 +59,19 @@ CREATE TABLE IF NOT EXISTS `Bar_Rest_ElCruce`.`Trabajador` (
   CONSTRAINT `chk_estadoTrab` CHECK (`estado` = 'Activo' OR `estado` = 'Inactivo'))
 ENGINE = InnoDB;
 
+-- Solo para probar con SQLALCHEMY
+CREATE TABLE IF NOT EXISTS `Bar_Rest_ElCruce`.`trabajador` (
+  `cedula` INT(15) 	   NOT NULL,
+  `nombre` VARCHAR(50) NOT NULL,
+  `puesto` VARCHAR(45) NOT NULL DEFAULT 'Salonera',
+  `contrasenia` TEXT   NOT NULL,
+  `estado` VARCHAR(25) NOT NULL DEFAULT 'Activo',
+  
+  PRIMARY KEY (`cedula`),
+  CONSTRAINT `chk_puestoTrab` CHECK (`puesto` = 'Administradora' OR `puesto` = 'Salonera'
+									OR `puesto` = 'Suplente'),
+  CONSTRAINT `chk_estadoTrab` CHECK (`estado` = 'Activo' OR `estado` = 'Inactivo'))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `Bar_Rest_ElCruce`.`Cliente`

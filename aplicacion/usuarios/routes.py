@@ -1,7 +1,9 @@
 from flask import request, redirect, render_template
+from flask_login import login_required
 from . import usuarios, controller
 
 @usuarios.route('/guardar-usuario', methods=['GET', 'POST'])
+@login_required
 def  guardar_usuario():
     if(request.method == 'POST'):
         try:
@@ -20,12 +22,14 @@ def  guardar_usuario():
 
 
 @usuarios.route('/usuarios', methods=['GET', 'POST'])
+@login_required
 def mostrar_usuarios():
     datos = controller.mostrar_usuarios()
     return render_template('Usuarios.html', values=datos)
 
  
 @usuarios.route('/cambiar-estado-usuario', methods=['GET', 'POST'])
+@login_required
 def cambiar_estado():
     cedula = request.args.get('idusuario')
     controller.cambiar_estado(cedula)
@@ -33,6 +37,7 @@ def cambiar_estado():
 
 
 @usuarios.route('/nuevo-usuario', methods=['GET', 'POST'])
+@login_required
 def nuevo_usuario():
     valores         = ['']
     textoformulario = 'Registrar usuario'
@@ -43,6 +48,7 @@ def nuevo_usuario():
 
 
 @usuarios.route('/modificar-usuario', methods=['GET', 'POST'])
+@login_required
 def modificar_usuario(): 
     btn      = 'editar'
     btn_text = 'Guardar Edicion'

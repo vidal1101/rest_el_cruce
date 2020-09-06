@@ -1,8 +1,10 @@
 from flask import request, redirect, render_template
+from flask_login import login_required
 from . import productos, controller
 from aplicacion.categorias import controller as controlador_categoria
 
 @productos.route('/productos', methods=['GET', 'POST'])
+@login_required
 def mostrar_productos():
     idcate = request.args.get("idcategoria")
     datos  = controller.mostrar_productos(idcate)
@@ -11,6 +13,7 @@ def mostrar_productos():
 
 #a registrar productos de una categoria especifica 
 @productos.route('/registrar-producto', methods=['GET', 'POST'])
+@login_required
 def registrar_producto(): 
     textoformulario = 'Registrar Producto'
     btn_text        = 'Guardar Producto'
@@ -22,12 +25,14 @@ def registrar_producto():
 
 
 @productos.route('/cambiar-estado-producto', methods=['GET', 'POST'])
+@login_required
 def cambiar_estado():
     controller.cambiar_estado(request)
     return redirect("inventario")
 
 
 @productos.route('/modificar-producto', methods=['GET', 'POST'])
+@login_required
 def modificar_producto():
     idprod          = request.args.get("idproducto")
     datos           = controlador_categoria.mostrar_categorias()
@@ -40,6 +45,7 @@ def modificar_producto():
 
 
 @productos.route('/guardar-producto', methods=['GET', 'POST'])
+@login_required
 def guardar_producto():
     try:
         btnvalor  = request.form['btn']
@@ -58,6 +64,7 @@ def guardar_producto():
 
 
 @productos.route('/productos-completos', methods=['GET', 'POST'])
+@login_required
 def todos_productos():
     title = 'Todos los Productos'
     return render_template('Productos.html',titulo=title)

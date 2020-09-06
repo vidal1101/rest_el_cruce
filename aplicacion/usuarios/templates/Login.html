@@ -7,7 +7,15 @@
 
             <h1 class="m-2 text-center">Iniciar Sesión</h1>
 
-            <form class="needs-validation" action="inicio" method="POST" novalidate>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <form class="needs-validation" action="login" method="POST" novalidate>
 
                 <div class="mb-3">
                     <label for="ced">Cédula</label>

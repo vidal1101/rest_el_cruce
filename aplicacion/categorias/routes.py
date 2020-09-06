@@ -1,13 +1,16 @@
 from flask import render_template, request, redirect
+from flask_login import login_required
 from . import categorias, controller
 
 @categorias.route('/categorias', methods=['GET', 'POST'])
 @categorias.route('/inventario', methods=['GET', 'POST'])
+@login_required
 def mostrar_categorias():
     datos = controller.mostrar_categorias()
     return render_template('Inventario.html', valores=datos)
 
 @categorias.route('/InsertCategorias', methods=['GET', 'POST'])
+@login_required
 def guardar_categoria():
     try:
         btnvalor = request.form['btn']
@@ -26,12 +29,14 @@ def guardar_categoria():
     return redirect('inventario')
 
 @categorias.route('/cambiar-estado-categoria', methods=['GET', 'POST'])
+@login_required
 def actualizar_estado():
     idcate = request.args.get("id")
     controller.cambiar_estado(idcate)
     return mostrar_categorias()
 
 @categorias.route('/registrar-categoria', methods=['GET', 'POST'])
+@login_required
 def formulario_registrar():
     valores=['']
     textoformulario='Registrar Categoria'
@@ -40,6 +45,7 @@ def formulario_registrar():
     return render_template('RegCategoria.html',contact=valores, btn=btn,texto=textoformulario,btntext=btnText)
 
 @categorias.route('/modificar-categoria', methods=['GET', 'POST'])
+@login_required
 def formulario_modificar():
     idcate    = request.args.get("idcategoria")
     valores   = controller.mostrar_categoria(idcate)
