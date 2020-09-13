@@ -1,0 +1,74 @@
+{% extends "Menu-Bar.html" %}
+{% block content %}
+{{ super() }}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb col-6 col-md-3 mt-1 ml-2">
+        <li class="breadcrumb-item"><a href="/">Menú principal</a></li>
+        <li class="breadcrumb-item"><a href="caja">Caja</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Proformas</li>
+    </ol>
+</nav>
+
+<div class="container-fluid">
+    <h1 class="text-center mb-3">Centro de proformas</h1>
+    <div class="row">
+        <!-- Cada uno de estos elementos corresponde a una proforma. -->
+        <div class="col-3">
+            <h2 class="text-center">Clientes en barra</h2>
+
+            <table class="table table-hover">
+                <thead>
+                    <th>Cliente</th>
+                    <th>Salonera</th>
+                </thead>
+                <tbody>
+                    <td>El de amarillo</td>
+                    <td>Karina Chavarría</td>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="col-9">
+            <h2 class="text-center">Clientes en mesa</h2>
+            <div class="row">
+                <div class="col-4">
+
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body border">
+                            <h4 class="card-title">Proforma <span class="badge badge-secondary">#1</span></h4>
+                            <p class="card-text text-right">Salonera: Luisa Gómez</p>
+                            <p class="card-text text-right">Cliente: Camisa azul</p>
+                            <a href="/administrar-proforma?id=102" class="btn btn-warning">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body border">
+                            <h4 class="card-title">Proforma <span class="badge badge-secondary">#2</span></h4>
+                            <p class="card-text text-right">Salonera: Luisa Gómez</p>
+                            <p class="card-text text-right">Cliente: Camisa azul</p>
+                            <a href="administrar-proforma?id=102" class="btn btn-warning">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body border">
+                            <h4 class="card-title">Proforma <span class="badge badge-secondary">#3</span></h4>
+                            <p class="card-text text-right">Salonera: Luisa Gómez</p>
+                            <p class="card-text text-right">Cliente: Camisa azul</p>
+                            <a href="administrar-proforma?id=103" class="btn btn-warning">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

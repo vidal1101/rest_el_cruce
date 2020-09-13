@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="static/bootstrap-4.5.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/javascript-calculator-1/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Proforma</title>
+
+</head>
+
+<body>
+
+    <div class="container-fluid user-select-none">
+        <!-- Encabezado -->
+        <div class="row bg-light fixed-top">
+            <div class="col-6 float-left">
+                <h3 class="m-2"> Proforma <span class="badge badge-secondary">#1</span></h3>
+            </div>
+            <div class="col-6">
+                <a href="proformas" class="btn btn-danger  mr-2 mt-1 mb-2 rounded-pill float-right">Regresar</a>
+                <a href="" class="btn btn-primary mr-2 mt-1 mb-2 rounded-pill float-right">Actualizar</a>
+
+                <!-- Botón que lanza la ventana para realizar el cobro -->
+                <button type="button" class="btn btn-warning mr-2 mt-1 mb-2 rounded-pill" data-toggle="modal"
+                    data-target="#exampleModal">
+                    Realizar Cobro
+                </button>
+            </div>
+        </div>
+
+        <!-- Cuerpo -->
+        <div class="row mt-5">
+            <div class="col-12 col-sm-4 mt-4 border-right border-info">
+
+                <div class="p-1 text-dark" style="height: 300px; Overflow-y:auto;">
+                    <!-- Productos pedidos por la/el cliente. -->
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item">Cras justo odio.
+                            <span class="float-right">
+                                <input type="number" value="0" min="0" size="4">
+                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
+                            </span>
+                        </li>
+
+                        <li class="list-group-item">Cras justo odio.
+                            <span class="float-right">
+                                <input type="number" value="0" min="0" size="4">
+                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
+                            </span>
+                        </li>
+
+                        <li class="list-group-item">Cras justo odio.
+                            <span class="float-right">
+                                <input type="number" value="0" min="0" size="4">
+                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
+                            </span>
+                        </li>
+
+                        <li class="list-group-item">Cras justo odio.
+                            <span class="float-right">
+                                <input type="number" value="0" min="0" size="4">
+                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
+                            </span>
+                        </li>
+
+                        <li class="list-group-item">Cras justo odio.
+                            <span class="float-right">
+                                <input type="number" value="0" min="0" size="4">
+                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
+                            </span>
+                        </li>
+
+                        <li class="list-group-item">Cras justo odio.
+                            <span class="float-right">
+                                <input type="number" value="0" min="0" size="4">
+                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
+                            </span>
+                        </li>
+
+                        <li class="list-group-item">Cras justo odio.
+                            <span class="float-right">
+                                <input type="number" value="0" min="0" size="4">
+                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
+                            </span>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- Productos disponibles en el restaurante-->
+            <div class="col-12 col-sm-8 mt-4">
+
+                <div class="mb-2">
+
+                    <form>
+                        <div class="form-row align-items-center">
+
+                            <div class="col-auto my-1">
+                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                    <option selected>Seleccionar Categoría</option>
+                                    <option value="1">Cervezas</option>
+                                    <option value="2">Ensaladas</option>
+                                    <option value="3">Ron</option>
+                                </select>
+                            </div>
+                            <div class="col-auto my-1">
+                                <button type="button" class="btn btn-primary">Aceptar</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div style="Overflow-y:auto; height: 470px;">
+                    <table class="table table-hover table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">102</th>
+                                <td>Cervezas</td>
+                                <td>Imperial 1L Botella</td>
+                                <td>¢ 1200</td>
+                                <td>17</td>
+                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">105</th>
+                                <td>Cervezas</td>
+                                <td>Pilsen 1L Botella</td>
+                                <td>¢ 1520</td>
+                                <td>14</td>
+                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">105</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>¢ 1520</td>
+                                <td>14</td>
+                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">105</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>¢ 1520</td>
+                                <td>14</td>
+                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">105</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>¢ 1520</td>
+                                <td>14</td>
+                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">105</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>¢ 1520</td>
+                                <td>14</td>
+                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">105</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>¢ 1520</td>
+                                <td>14</td>
+                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">105</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>¢ 1520</td>
+                                <td>14</td>
+                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">105</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>¢ 1520</td>
+                                <td>14</td>
+                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="exampleModalLabel">Proforma
+                        <span class="badge badge-secondary">#1</span>
+                    </h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+
+                        <h4 class="text-center mb-3"><span class="badge badge-primary">Sábado 12 septiembre 2020</span></h4>
+                        <!-- Medios de pago -->
+                        <div class="row border-bottom">
+
+                            <div class="col-2 mb-2">
+                                <label>Tipo de pago</label>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="efectivo" name="tipoPago" class="custom-control-input"
+                                        value="efectivo" data-toggle="collapse" data-target="#collapse"
+                                        aria-expanded="false" aria-controls="collapse" checked>
+                                    <label class="custom-control-label" for="efectivo">Efectivo</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="tarjeta" name="tipoPago" class="custom-control-input"
+                                        value="tarjeta" data-toggle="collapse" data-target="#collapse"
+                                        aria-expanded="false" aria-controls="collapse">
+                                    <label class="custom-control-label" for="tarjeta">Tarjeta</label>
+                                </div>
+                            </div>
+
+                            <div class="col-4 border-right mb-2">
+                                <div class="collapse" id="collapse">
+                                    <label for="numTarjeta">Últimos 4 dígitos de la tarjeta</label>
+                                    <input type="text" class="form-control" id="numTarjeta" name="numTarjeta"
+                                        placeholder="Escribir...">
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-6 border-left mb-2">
+                                <h5>Atendido por: <span class="badge badge-secondary">nombre_salonera</span></h5>
+
+                                <h5>Valor del dolar: <span class="badge badge-secondary">$569.14</span></h5>
+                            </div>
+
+                        </div>
+                        <!-- Fin medio de pago-->
+
+                        <div class="row m-3">
+                            <div class="col-10 mx-auto">
+                                <form>
+
+                                    <div class="form-group row">
+                                        <label for="total-pagar" class="col-sm-4 col-form-label">Total a pagar: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="total-pagar" value="¢ 0.00"
+                                                readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="paga-con" class="col-sm-4 col-form-label">Paga con: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="paga-con" value="¢ 0.00">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="vuelto" class="col-sm-4 col-form-label">Vuelto: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="vuelto" value="¢ 0.00" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="factura-electronica" name="factura-electronica" value="True">
+                                                <label class="custom-control-label" for="factura-electronica">
+                                                    Solicita factura electrónica.
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-6">
+                                            <button type="reset" class="btn btn-primary">Limpiar datos</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success">Cobrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="static/bootstrap-4.5.0-dist/jquery-3.5.1.slim.min.js"></script>
+    <script src="static/bootstrap-4.5.0-dist/popper.min.js"></script>
+    <script src="static/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
