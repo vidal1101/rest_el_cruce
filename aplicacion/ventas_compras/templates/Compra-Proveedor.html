@@ -1,7 +1,54 @@
-{% extends "Menu-Bar.html" %}
+{% extends "Base.html" %}
 {% block content %}
 {{ super() }}
 <div class="container">
+    <!-- Encabezado -->
+    <div class="row bg-light fixed-top">
+        <div class="col-6 mx-auto">
+            <a href="/caja" class="btn btn-danger  mr-2 mt-1 mb-2 rounded-pill float-right">Cancelar</a>
+            <a href="" class="btn btn-primary mr-2 mt-1 mb-2 rounded-pill float-right">Actualizar</a>
 
+            <!-- Botón que lanza la ventana para realizar la compra -->
+            <button type="button" class="btn btn-warning mr-2 mt-1 mb-2 rounded-pill" data-toggle="modal"
+                data-target="#modal">
+                Registrar Compra
+            </button>
+        </div>
+    </div>
+
+    <h3 class="mt-5">Se colocan los campos para que seleccione los productos a comprar, así como también que elija el
+        proveedor a
+        quien le compra.</h3>
+
+</div>
+
+<!-- Modal con los demás campos para realizar el pago... -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="container">
+                    <div class="row">
+                        <p>Contenido basicos que se necesitan para completar la factura...</p>
+                        <p>Preguntar si desea poder imprimir las facturas, ya sea para entregarles a los proveedores o
+                            para uso propio.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
