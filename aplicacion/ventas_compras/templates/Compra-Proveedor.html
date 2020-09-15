@@ -17,7 +17,7 @@
     </div>
 
     <div class="row mt-5">
-        <div class="col-12 col-sm-4 mt-4 border-right border-info">
+        <div class="col-12 col-md-4 mt-4 border-right border-info">
             <div class="p-1 text-dark" style="height: 400px; Overflow-y:auto;">
                 <!-- Productos pedidos por la/el cliente. -->
                 <ul class="list-group list-group-flush">
@@ -129,8 +129,27 @@
 
             </div>
         </div>
-        <div class="col-6">
-            --
+
+        <!-- Siguiente parte de la pantalla-->
+        <div class="col-8 mt-1">
+            <form>
+                <div class="form-row align-items-center">
+                    <div class="col-auto my-1">
+                        <select class="custom-select mr-sm-2" id="categoria" name="categoria">
+                            <option selected>Seleccionar Categoría</option>
+                            <option value="1">Cervezas</option>
+                            <option value="2">Ensaladas</option>
+                            <option value="3">Ron</option>
+                        </select>
+                    </div>
+                    <div class="col-auto my-1">
+                        <button type="button" class="btn btn-primary">Aceptar</button>
+                    </div>
+                </div>
+            </form>
+
+            Se muestran todos los productos.
+            Colocar otro tipo de etiquetas, ya que la tabla da problemas.
         </div>
     </div>
 
