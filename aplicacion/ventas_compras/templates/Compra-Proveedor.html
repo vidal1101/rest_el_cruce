@@ -16,9 +16,10 @@
         </div>
     </div>
 
-    <h3 class="mt-5">Se colocan los campos para que seleccione los productos a comprar, así como también que elija el
-        proveedor a
-        quien le compra.</h3>
+    <h3 class="mt-5">
+        Se colocan los campos para que seleccione los productos a comprar, así como también que elija el
+        proveedor a quien le compra.
+    </h3>
 
 </div>
 
@@ -27,7 +28,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Realizar Compra</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -35,18 +36,79 @@
             <div class="modal-body">
 
                 <div class="container">
-                    <div class="row">
-                        <p>Contenido basicos que se necesitan para completar la factura...</p>
-                        <p>Preguntar si desea poder imprimir las facturas, ya sea para entregarles a los proveedores o
-                            para uso propio.
-                        </p>
+                    <h4 class="text-center mb-3"><span class="badge badge-primary">Sábado 12 septiembre 2020</span></h4>
+
+
+                    <div class="row m-3">
+                        <div class="col-10 mx-auto">
+                            <form>
+
+                                <div class="form-group row">
+                                    <!-- Se envía la cédula de la persona que realiza la compra -->
+                                    <label for="encargada" class="col-sm-4 col-form-label">Encargada(o) de la compra:
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="encargada" name="encargada"
+                                            value="Administradora" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row border-bottom border-info">
+                                    <!-- Sirve de información futura como pista -->
+                                    <label for="idcaja" class="col-sm-4 col-form-label">Número de Caja: </label>
+                                    <div class="col-sm-8 mb-2">
+                                        <input type="text" class="form-control" id="idcaja" name="idcaja" value="#168"
+                                            readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <!-- Se debe enviar el ID del proveedor -->
+                                    <label for="proveedor" class="col-sm-4 col-form-label">Proveedor: </label>
+                                    <div class="col-sm-8">
+                                        <select class="custom-select mr-sm-2" id="proveedor">
+                                            <option selected>Seleccionar Proveedor</option>
+                                            <option value="1">PATITOS S.A</option>
+                                            <option value="2">CocaCola S.A</option>
+                                            <option value="3">Florida S.A</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="total-pagar" class="col-sm-4 col-form-label">Total a pagar: </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="total-pagar" name="total-pagar"
+                                            value="¢ 0.00" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                            <input type="checkbox" class="custom-control-input" id="pendiente"
+                                                name="cuenta-pendiente" value="True">
+                                            <label class="custom-control-label" for="pendiente">
+                                                Marcar como <strong>Cuenta por pagar.</strong>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-6">
+                                        <button type="reset" class="btn btn-danger">Anular compra</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success">Registrar Compra</button>
             </div>
         </div>
     </div>
