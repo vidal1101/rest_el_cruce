@@ -1,14 +1,14 @@
 /*
- * Script de la tabla Categoria 
- * stp de insertar  	        -> stp_insertarCategoria
- * stp de modificar 	        -> stp_modificarCategoria
- * stp de cambiar estado        -> stp_cambiarEstadoCategoria
- * stp de mostrar una categoria -> stp_stp_mostrarCategoria
+ * Script de la tabla categoria 
+ * stp de insertar  	        -> stp_insertarcategoria
+ * stp de modificar 	        -> stp_modificarcategoria
+ * stp de cambiar estado        -> stp_cambiarEstadocategoria
+ * stp de mostrar una categoria -> stp_stp_mostrarcategoria
  */
  
 -- stp insertar
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_insertarCategoria`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_insertarcategoria`(
 IN  $nombreCate VARCHAR(45),
 IN  $descrip    TEXT,
 IN  $estado     VARCHAR(10)
@@ -17,12 +17,12 @@ IN  $estado     VARCHAR(10)
 )
 BEGIN
 	
-    IF NOT EXISTS (SELECT nombreCate FROM Categoria WHERE nombreCate = $nombreCate) THEN
+    IF NOT EXISTS (SELECT nombreCate FROM categoria WHERE nombreCate = $nombreCate) THEN
        
-        INSERT INTO Categoria (nombreCate,descripcion,estado) 
+        INSERT INTO categoria (nombreCate,descripcion,estado) 
 			VALUES ($nombreCate, $descrip,$estado);
 -- 		SET $insertado = 1;
--- 		SET $mensaje = 'Categoria registrada.';
+-- 		SET $mensaje = 'categoria registrada.';
 -- 	ELSE
 -- 		SET $insertado = 0;
 --      SET $mensaje = 'Ya existe una categoría con este nombre.';
@@ -32,7 +32,7 @@ DELIMITER ;
 
 -- stp de modificar 
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_modificarCategoria`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_modificarcategoria`(
 IN  $idCate 	INT,
 IN  $nomCate 	VARCHAR(45),
 IN  $descrip 	TEXT,
@@ -41,13 +41,13 @@ IN  $estado 	VARCHAR(10)
 -- OUT $mensaje    VARCHAR(50)
 )
 BEGIN
-	IF EXISTS (SELECT idCategoria FROM Categoria WHERE idCategoria = $idCate) THEN
+	IF EXISTS (SELECT idcategoria FROM categoria WHERE idcategoria = $idCate) THEN
         
-		UPDATE Categoria SET
+		UPDATE categoria SET
 				nombreCate    = $nomCate,
                 descripcion   = $descrip,
                 estado 	      = $estado
-			WHERE idCategoria = $idCate;
+			WHERE idcategoria = $idCate;
 		
 -- 		SET $modificado     = 1;
 --      SET $mensaje 		= 'Categoría modificada';
@@ -60,7 +60,7 @@ DELIMITER ;
 
 -- stp de modificar estado 
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_cambiarEstadoCategoria`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_cambiarEstadocategoria`(
 IN  $idCate     INT
 -- OUT $mensaje 	VARCHAR(50),
 -- OUT $encontrado BOOLEAN
@@ -70,10 +70,10 @@ BEGIN
 DECLARE estadoActual VARCHAR(10);
 
 -- Verificamos si el usuario existe y si existe obtenemos su estado
-		IF EXISTS (SELECT idCategoria FROM Categoria WHERE idCategoria = $idCate) THEN
+		IF EXISTS (SELECT idcategoria FROM categoria WHERE idcategoria = $idCate) THEN
 			
             -- Revisamos el estado actual del registro
-			SET estadoActual = (SELECT estado FROM Categoria WHERE idCategoria = $idCate);
+			SET estadoActual = (SELECT estado FROM categoria WHERE idcategoria = $idCate);
             
             -- Cambiamos el estado
             IF (estadoActual = 'Activo') THEN
@@ -88,7 +88,7 @@ DECLARE estadoActual VARCHAR(10);
                 
             END IF;
 			
-            UPDATE Categoria SET estado = estadoActual WHERE idCategoria = $idCate;
+            UPDATE categoria SET estado = estadoActual WHERE idcategoria = $idCate;
 -- 			SET $encontrado = 1;
             
 -- 		ELSE
@@ -98,19 +98,19 @@ DECLARE estadoActual VARCHAR(10);
 END //
 DELIMITER ;
 
--- stp mostrar Categoria
+-- stp mostrar categoria
 DELIMITER //
- CREATE DEFINER = `adminRestBar`@`localhost` PROCEDURE `stp_mostrarCategoria`(
+ CREATE DEFINER = `adminRestBar`@`localhost` PROCEDURE `stp_mostrarcategoria`(
  IN  $idCate   	 INT
 -- OUT $mensaje    VARCHAR(50),
 -- OUT $encontrado BOOLEAN
 )
 BEGIN
-	IF ((SELECT COUNT(idCategoria) FROM Categoria
-			WHERE idCategoria = $idCate) > 0) THEN
+	IF ((SELECT COUNT(idcategoria) FROM categoria
+			WHERE idcategoria = $idCate) > 0) THEN
     
-		SELECT idCategoria, nombreCate, descripcion, estado, nombreFoto FROM Categoria
-			WHERE idCategoria = $idCate;
+		SELECT idcategoria, nombreCate, descripcion, estado, nombreFoto FROM categoria
+			WHERE idcategoria = $idCate;
 --        SET $mensaje = 'Categoría encontrada.';
 --        SET $encontrado = 1;
 -- 	ELSE
@@ -130,11 +130,11 @@ IN $foto LONGBLOB,
 IN $nombreFoto TEXT
 )
 BEGIN
-	IF EXISTS (SELECT `idCategoria` FROM `Categoria` WHERE `idCategoria` = $id) THEN
-		UPDATE `Categoria` SET
+	IF EXISTS (SELECT `idcategoria` FROM `categoria` WHERE `idcategoria` = $id) THEN
+		UPDATE `categoria` SET
 			`foto` 		= $foto,
             `nombreFoto` = $nombreFoto
-        WHERE `idCategoria` = $id;
+        WHERE `idcategoria` = $id;
     END IF;
 END $$
 DELIMITER ;
@@ -145,8 +145,8 @@ CREATE DEFINER = `adminRestBar`@`localhost` PROCEDURE `stp_obtener_foto_categori
 IN $id INT(45)
 )
 BEGIN
-	IF EXISTS (SELECT `idCategoria` FROM `Categoria` WHERE `idCategoria` = $id) THEN
-		SELECT `foto` FROM `Categoria` WHERE `idCategoria` = $id;
+	IF EXISTS (SELECT `idcategoria` FROM `categoria` WHERE `idcategoria` = $id) THEN
+		SELECT `foto` FROM `categoria` WHERE `idcategoria` = $id;
     END IF;
 END $$
 DELIMITER ;
@@ -164,12 +164,12 @@ IN $nombreFoto TEXT
 )
 BEGIN
 	
-    IF NOT EXISTS (SELECT nombreCate FROM Categoria WHERE nombreCate = $nombreCate) THEN
+    IF NOT EXISTS (SELECT nombreCate FROM categoria WHERE nombreCate = $nombreCate) THEN
        
-        INSERT INTO Categoria (nombreCate,descripcion,estado, foto, nombreFoto) 
+        INSERT INTO categoria (nombreCate,descripcion,estado, foto, nombreFoto) 
 			VALUES ($nombreCate, $descrip,$estado, $foto, $nombreFoto);
 -- 		SET $insertado = 1;
--- 		SET $mensaje = 'Categoria registrada.';
+-- 		SET $mensaje = 'categoria registrada.';
 -- 	ELSE
 -- 		SET $insertado = 0;
 --      SET $mensaje = 'Ya existe una categoría con este nombre.';

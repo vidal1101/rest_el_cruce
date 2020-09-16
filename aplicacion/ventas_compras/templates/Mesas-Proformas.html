@@ -14,7 +14,11 @@
     <div class="row">
         <div class="col-6 border-right">
 
-            <a class="btn btn-success float-right" href="/">Añadir Barra</a>
+            <!-- Se abre un modal para añadir -->
+            <button type="button" class="btn btn-success float-right" data-toggle="modal" data-whatever="Barra"
+                data-target="#modal-cliente">
+                Añadir Barra
+            </button>
             <h3 class="border-bottom"><span class="badge badge-dark">BARRA</span></h3>
 
             <div style="Overflow-x:hidden; Overflow-y:auto; height: 470px;">
@@ -23,7 +27,7 @@
                     <div class="col-6 mt-1">
                         <div class="card">
                             <div class="card-header text-white bg-info">
-                                Proforma <span class="badge badge-secondary">#3</span>
+                                Proforma <span class="badge badge-dark">#3</span>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title border-bottom">
@@ -33,10 +37,10 @@
                                 <p class="card-text">With supporting text below as a natural lead-in to additional
                                     content.
                                 </p>
-                                <a href="#" class="btn btn-success">Go somewhere</a>
+                                <a href="administrar-proforma" class="btn btn-info">Ingresar</a>
                             </div>
                             <div class="card-footer text-muted">
-                                2 days ago
+                                Total a pagar ¢ 52,000.00
                             </div>
                         </div>
                     </div>
@@ -44,7 +48,7 @@
                     <div class="col-6 mt-1">
                         <div class="card">
                             <div class="card-header text-white bg-info">
-                                Proforma <span class="badge badge-secondary">#3</span>
+                                Proforma <span class="badge badge-dark">#3</span>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title border-bottom">
@@ -54,10 +58,10 @@
                                 <p class="card-text">With supporting text below as a natural lead-in to additional
                                     content.
                                 </p>
-                                <a href="#" class="btn btn-success">Go somewhere</a>
+                                <a href="administrar-proforma" class="btn btn-info">Ingresar</a>
                             </div>
                             <div class="card-footer text-muted">
-                                2 days ago
+                                Total a pagar ¢ 52,000.00
                             </div>
                         </div>
                     </div>
@@ -65,7 +69,7 @@
                     <div class="col-6 mt-1">
                         <div class="card">
                             <div class="card-header text-white bg-info">
-                                Proforma <span class="badge badge-secondary">#3</span>
+                                Proforma <span class="badge badge-dark">#3</span>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title border-bottom">
@@ -75,7 +79,7 @@
                                 <p class="card-text">With supporting text below as a natural lead-in to additional
                                     content.
                                 </p>
-                                <a href="#" class="btn btn-success">Go somewhere</a>
+                                <a href="administrar-proforma" class="btn btn-info">Ingresar</a>
                             </div>
                             <div class="card-footer text-muted">
                                 Total a pagar ¢ 52,000.00
@@ -90,57 +94,142 @@
 
         <div class="col-6 border-left">
 
-            <a class="btn btn-success float-right" href="/">Añadir Mesa</a>
+            <button type="button" class="btn btn-success float-right" data-toggle="modal" data-whatever="Mesa"
+                data-target="#modal-cliente">
+                Añadir Mesa
+            </button>
             <h3 class="border-bottom"><span class="badge badge-dark">MESAS</span></h3>
 
             <div style="Overflow-x:hidden; Overflow-y:auto; height: 470px;">
                 <div class="row">
                     <div class="col-6 mt-1">
-                        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                            <div class="card-header">Proforma <span class="badge badge-secondary">#3</span></div>
-                            <div class="card-body">
-                                <h5 class="card-title">Dark card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-warning">Go somewhere</a>
-
+                        <div class="card">
+                            <div class="card-header text-white bg-success">
+                                Proforma <span class="badge badge-dark">#3</span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-6 mt-1">
-                        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                            <div class="card-header">Proforma <span class="badge badge-secondary">#3</span></div>
                             <div class="card-body">
-                                <h5 class="card-title">Dark card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-warning">Go somewhere</a>
-
+                                <h5 class="card-title border-bottom">
+                                    <span class="badge badge-secondary">C:</span>
+                                    El de camisa Azul
+                                </h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional
+                                    content.
+                                </p>
+                                <a href="administrar-proforma" class="btn btn-success">Ingresar</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Total a pagar ¢ 52,000.00
                             </div>
                         </div>
                     </div>
 
                     <div class="col-6 mt-1">
-                        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                            <div class="card-header">Proforma <span class="badge badge-secondary">#3</span></div>
+                        <div class="card">
+                            <div class="card-header text-white bg-success">
+                                Proforma <span class="badge badge-dark">#3</span>
+                            </div>
                             <div class="card-body">
-                                <h5 class="card-title">Dark card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-warning">Go somewhere</a>
-
+                                <h5 class="card-title border-bottom">
+                                    <span class="badge badge-secondary">C:</span>
+                                    El de camisa Azul
+                                </h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional
+                                    content.
+                                </p>
+                                <a href="administrar-proforma" class="btn btn-success">Ingresar</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Total a pagar ¢ 52,000.00
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-6 mt-1">
+                        <div class="card">
+                            <div class="card-header text-white bg-success">
+                                Proforma <span class="badge badge-dark">#3</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title border-bottom">
+                                    <span class="badge badge-secondary">C:</span>
+                                    El de camisa Azul
+                                </h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional
+                                    content.
+                                </p>
+                                <a href="administrar-proforma" class="btn btn-success">Ingresar</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Total a pagar ¢ 52,000.00
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 mt-1">
+                        <div class="card">
+                            <div class="card-header text-white bg-success">
+                                Proforma <span class="badge badge-dark">#3</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title border-bottom">
+                                    <span class="badge badge-secondary">C:</span>
+                                    El de camisa Azul
+                                </h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional
+                                    content.
+                                </p>
+                                <a href="administrar-proforma" class="btn btn-success">Ingresar</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Total a pagar ¢ 52,000.00
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
 
     </div>
-</div>
-</div>
-</div>
-{% endblock %}
+
+    <div class="modal fade" id="modal-cliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nuevo cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Lugar de atención:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success">Guardar Proforma</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('#modal-cliente').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('Nuevo cliente en ' + recipient)
+            modal.find('.modal-body input').val(recipient)
+        })
+    </script>
+
+    {% endblock %}
