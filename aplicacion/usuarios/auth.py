@@ -16,7 +16,7 @@ def login_post():
     cedula = request.form.get('cedula')
     password = request.form.get('contrasena')
     #remember = True if request.form.get('remember') else False
-
+        
     user = Trabajador.query.filter_by(cedula = cedula).first()
 
     if user == None or not check_password_hash(user.contrasenia, password):

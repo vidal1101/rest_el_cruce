@@ -175,13 +175,32 @@ BEGIN
 END //
 DELIMITER ;
 
-DELIMITER $$
+
+
+
+delimiter $$
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_nuevaCaja`(
+in $idTrabajador int(11),
+in $fechaHora datetime,
+in $fondoCaja double(10,2),
+in $valorDolar double(10,2),
+in $estado varchar(10)
+)
+BEGIN
+     
+	insert into caja( idTrabajador,fechaApertura,fondoCaja,valorDolar,estado)
+    values( $idTrabajador,$fechaHora,$fondoCaja,$valorDolar,$estado);
+END$$
+delimiter ;
+
+
+delimiter $$
 CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_verEstadoCajas`()
 BEGIN
 	DECLARE numUltimoCaja int(11);
-    set numUltimoCaja = (select max(idCaja) as num_Caja   from Caja );
+    set numUltimoCaja = (select max(idCaja) as num_Caja   from caja );
     
-    if exists(select idCaja , idTrabajador, estado from Caja where idCaja = numUltimoCaja  
+    if exists(select idCaja , idTrabajador, estado from caja where idCaja = numUltimoCaja  
 		and estado ='abierta' ) then
   
 			select 'cajaAbierta',numUltimoCaja;
@@ -190,4 +209,16 @@ BEGIN
    end if;
     
 END$$
-DELIMITER ;
+delimiter ;
+
+
+delimiter $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `stp_mostrarProductosCaja`()
+BEGIN
+		select pro.idProducto , cate.nombreCate , pro.nombre , pro.precioVenta
+		from producto as pro inner join categoria as cate 
+		on pro.idCategoria = cate.idCategoria where pro.idCategoria = cate.idCategoria
+		order by pro.idProducto;
+END
+delimiter ;
+

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,13 +8,29 @@
     <script src="static/jquery.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Título</title>
+    <!--swet alerts-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+
+    <!--fuentes del modo  oscuro .. descargar el archivo de fontawesomw de forma local -->
+    <link rel="stylesheet" href="static/darkmodeCCS/estilos.css">
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-    {% block content %}
-    {% endblock %}
+    {% block content %} {% endblock %}
+
+    <script src="static/darkmodeJS/main.js"></script>
+
+
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="static/alertas/alert.js"></script>
+
+
+    <script src="static/bootstrap-4.5.0-dist/jquery-3.5.1.slim.min.js"></script>
     <script src="static/bootstrap-4.5.0-dist/popper.min.js"></script>
     <script src="static/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

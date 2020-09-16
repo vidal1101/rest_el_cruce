@@ -9,6 +9,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Proforma</title>
 
+    <link rel="stylesheet" href="static/darkmodeCCS/estilos.css">
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -18,80 +20,60 @@
         <div class="row bg-light fixed-top">
             <div class="col-6 float-left">
                 <h3 class="m-2"> Proforma <span class="badge badge-secondary">#1</span></h3>
+
             </div>
             <div class="col-6">
+
+
                 <a href="proformas" class="btn btn-danger  mr-2 mt-1 mb-2 rounded-pill float-right">Regresar</a>
                 <a href="" class="btn btn-primary mr-2 mt-1 mb-2 rounded-pill float-right">Actualizar</a>
 
                 <!-- Botón que lanza la ventana para realizar el cobro -->
-                <button type="button" class="btn btn-warning mr-2 mt-1 mb-2 rounded-pill" data-toggle="modal"
-                    data-target="#exampleModal">
-                    Realizar Cobro
+                <button type="button" onclick="cargarModalFacturando()" class="btn btn-warning mr-2 mt-1 mb-2 rounded-pill" data-toggle="modal" data-target="#exampleModal">
+                Realizar Cobro
+                </button>
+
+                <button href="" onclick="guardarProductos()" class="btn btn-success mr-2 mt-1 mb-2 rounded-pill float-left">Pagar</button>
+                <!--el btn swiht de color oscuro -->
+                <button class="switch" id="switch">
+                    <span><i class="fas fa-sun"></i></span>
+                    <span><i class="fas fa-moon"></i></span>
                 </button>
             </div>
+
         </div>
 
         <!-- Cuerpo -->
-        <div class="row mt-5">
+        <div class="row mt-5 ">
             <div class="col-12 col-sm-4 mt-4 border-right border-info">
 
-                <div class="p-1 text-dark" style="height: 300px; Overflow-y:auto;">
+                <div class="p-1 text-dark" id="listaProductos" style="height: 500px; Overflow-y:auto;">
                     <!-- Productos pedidos por la/el cliente. -->
                     <ul class="list-group list-group-flush">
 
                         <li class="list-group-item">Cras justo odio.
                             <span class="float-right">
-                                <input type="number" value="0" min="0" size="4">
-                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
+                                <input type="number" id="comprado" value="0" min="0" size="4">
                             </span>
-                        </li>
 
-                        <li class="list-group-item">Cras justo odio.
-                            <span class="float-right">
-                                <input type="number" value="0" min="0" size="4">
-                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
-                            </span>
-                        </li>
-
-                        <li class="list-group-item">Cras justo odio.
-                            <span class="float-right">
-                                <input type="number" value="0" min="0" size="4">
-                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
-                            </span>
-                        </li>
-
-                        <li class="list-group-item">Cras justo odio.
-                            <span class="float-right">
-                                <input type="number" value="0" min="0" size="4">
-                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
-                            </span>
-                        </li>
-
-                        <li class="list-group-item">Cras justo odio.
-                            <span class="float-right">
-                                <input type="number" value="0" min="0" size="4">
-                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
-                            </span>
-                        </li>
-
-                        <li class="list-group-item">Cras justo odio.
-                            <span class="float-right">
-                                <input type="number" value="0" min="0" size="4">
-                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
-                            </span>
-                        </li>
-
-                        <li class="list-group-item">Cras justo odio.
-                            <span class="float-right">
-                                <input type="number" value="0" min="0" size="4">
-                                <button type="button" class="btn btn-danger btn-sm  mr-1">Remover</button>
-                            </span>
                         </li>
 
                     </ul>
 
                 </div>
+                <br>
+                <div class="input-group mb-5">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><h2> Total ₡ :</h2> </span>
+                    </div>
+
+                    <input type="number" style="font-size: 45px ;" id="totalApagar" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="0.0" readonly>
+
+                </div>
+
+
             </div>
+
 
 
             <!-- Productos disponibles en el restaurante-->
@@ -101,8 +83,9 @@
 
                     <form>
                         <div class="form-row align-items-center">
+
                             <div class="col-auto my-1">
-                                <select class="custom-select mr-sm-2" id="categoria" name="categoria">
+                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                                     <option selected>Seleccionar Categoría</option>
                                     <option value="1">Cervezas</option>
                                     <option value="2">Ensaladas</option>
@@ -112,12 +95,15 @@
                             <div class="col-auto my-1">
                                 <button type="button" class="btn btn-primary">Aceptar</button>
                             </div>
+                            <div class="col-auto">
+                                <input type="text" id="myInput" class="form-control" placeholder="buscar producto " name="txtBusqueda" maxlength="50">
+                            </div>
                         </div>
                     </form>
 
                 </div>
 
-                <div style="Overflow-y:auto; height: 470px;">
+                <div id="tablaProductos" style="Overflow-y:auto; height: 500px;">
                     <table class="table table-hover table-sm">
                         <thead class="thead-dark">
                             <tr>
@@ -129,80 +115,24 @@
                                 <th scope="col"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">102</th>
-                                <td>Cervezas</td>
-                                <td>Imperial 1L Botella</td>
-                                <td>¢ 1200</td>
-                                <td>17</td>
-                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">105</th>
-                                <td>Cervezas</td>
-                                <td>Pilsen 1L Botella</td>
-                                <td>¢ 1520</td>
-                                <td>14</td>
-                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">105</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>¢ 1520</td>
-                                <td>14</td>
-                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">105</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>¢ 1520</td>
-                                <td>14</td>
-                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">105</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>¢ 1520</td>
-                                <td>14</td>
-                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">105</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>¢ 1520</td>
-                                <td>14</td>
-                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">105</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>¢ 1520</td>
-                                <td>14</td>
-                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">105</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>¢ 1520</td>
-                                <td>14</td>
-                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">105</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>¢ 1520</td>
-                                <td>14</td>
-                                <td><a href="#" class="btn btn-success">Agregar +</a></td>
-                            </tr>
+
+                        <tbody id="myTable">
+                            {%for indice in productos%}
+                            <div id="cuerpoTabla">
+                                <tr>
+
+                                    <th scope="row"> <input style="font-size: 25px ;" class="form-control" id="colunma0" value="{{indice.0}}" readonly></th>
+                                    <td> <input style="font-size: 21px ;" class="form-control" id="colunma1" value="{{indice.1}}" readonly></td>
+                                    <td> <input style="font-size: 21px ;" class="form-control" id="colunma2" value="{{indice.2}}" readonly></td>
+                                    <td> <input style="font-size: 21px ;" class="form-control" id="colunma3" value="{{indice.3}}" readonly></td>
+                                    <td><input style="font-size: 21px ;" class="form-control" id="colunma4" value="{{indice.4}}" readonly></td>
+                                    <td><button id="btnAgregarP" onclick="btn( {{indice.0}},'{{indice.1}}' , '{{indice.2}}' ,{{indice.3}} )" class="btn btn-success">Agregar +</button></td>
+
+                                </tr>
+                            </div>
+                            {%endfor%}
                         </tbody>
+
                     </table>
 
                 </div>
@@ -225,8 +155,8 @@
                     </h5>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
@@ -238,15 +168,11 @@
                             <div class="col-2 mb-2">
                                 <label>Tipo de pago</label>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="efectivo" name="tipoPago" class="custom-control-input"
-                                        value="efectivo" data-toggle="collapse" data-target="#collapse"
-                                        aria-expanded="false" aria-controls="collapse" checked>
+                                    <input type="radio" id="efectivo" name="tipoPago" class="custom-control-input" value="efectivo" aria-expanded="true" aria-controls="collapse" checked>
                                     <label class="custom-control-label" for="efectivo">Efectivo</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="tarjeta" name="tipoPago" class="custom-control-input"
-                                        value="tarjeta" data-toggle="collapse" data-target="#collapse"
-                                        aria-expanded="false" aria-controls="collapse">
+                                    <input type="radio" id="tarjeta" name="tipoPago" class="custom-control-input" value="tarjeta" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
                                     <label class="custom-control-label" for="tarjeta">Tarjeta</label>
                                 </div>
                             </div>
@@ -254,81 +180,450 @@
                             <div class="col-4 border-right mb-2">
                                 <div class="collapse" id="collapse">
                                     <label for="numTarjeta">Últimos 4 dígitos de la tarjeta</label>
-                                    <input type="text" class="form-control" id="numTarjeta" name="numTarjeta"
-                                        placeholder="Escribir...">
-
+                                    <input class="form-control" id="numeroTarjeta" type="number" maxlength="4" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
                                 </div>
                             </div>
 
 
                             <div class="col-6 border-left mb-2">
-                                <h5>Atendido por: <span class="badge badge-info">nombre_salonera</span></h5>
+                                <h5>Atendido por: <span class="badge badge-secondary">nombre_salonera</span></h5>
 
-                                <h5>Precio Dolar: <span class="badge badge-info">$ 569.14</span></h5>
+                                <h5>Valor del dolar: <span class="badge badge-secondary">$569.14</span></h5>
+
+                                <div class="col-6 col-md-8 m-2">
+
+                                    <input type="number" id="cantidadDolares" oninput="cargarModalFacturando()" class="form-control" placeholder="0.0" min="0" maxlength="6" style="font-size: 24px ;">
+                                </div>
+
                             </div>
+                            <!-- Fin medio de pago-->
 
-                        </div>
-                        <!-- Fin medio de pago-->
+                            <div class="row m-3">
+                                <div class="col-10 mx-auto">
+                                    <form>
 
-                        <div class="row m-3">
-                            <div class="col-10 mx-auto">
-                                <form>
-
-                                    <div class="form-group row">
-                                        <label for="total-pagar" class="col-sm-4 col-form-label">Total a pagar: </label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="total-pagar" value="¢ 0.00"
-                                                readonly>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="paga-con" class="col-sm-4 col-form-label">Paga con: </label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="paga-con" value="¢ 0.00">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="vuelto" class="col-sm-4 col-form-label">Vuelto: </label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="vuelto" value="¢ 0.00" readonly>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-10">
-                                            <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                                                <input type="checkbox" class="custom-control-input"
-                                                    id="factura-electronica" name="factura-electronica" value="True">
-                                                <label class="custom-control-label" for="factura-electronica">
-                                                    Solicita factura electrónica.
-                                                </label>
+                                        <div class="form-group row">
+                                            <label for="total-pagar" class="col-sm-4 col-form-label">Total a pagar: </label>
+                                            <div class="col-sm-8">
+                                                <input type="text" style="font-size: 26px ;" class="form-control" id="total-pagar" oninput="cargarModalFacturando()" value="¢ 0.00" readonly>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-6">
-                                            <button type="reset" class="btn btn-primary">Limpiar datos</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
 
+                                        <div class="form-group row">
+                                            <label for="paga-con" class="col-sm-4 col-form-label">Paga con ¢: </label>
+                                            <div class="col-sm-8">
+                                                <input type="number" style="font-size: 21px ;" class="form-control" id="paga-con" oninput="cargarModalFacturando()" value="¢ 0.00">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="vuelto" class="col-sm-4 col-form-label">Vuelto: </label>
+                                            <div class="col-sm-8">
+                                                <input type="text" style="font-size: 25px ;" class="form-control" id="vuelto" oninput="cargarModalFacturando()" value="¢ 0.00" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-sm-10">
+                                                <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                                    <input type="checkbox" class="custom-control-input" id="factura-electronica" name="factura-electronica" value="True">
+                                                    <label class="custom-control-label" for="factura-electronica">
+                                                Solicita factura electrónica.
+                                            </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-6">
+                                                <button type="reset" class="btn btn-primary">Limpiar datos</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success">Cobrar</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-success">Cobrar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <script src="static/bootstrap-4.5.0-dist/jquery-3.5.1.slim.min.js"></script>
-    <script src="static/bootstrap-4.5.0-dist/popper.min.js"></script>
-    <script src="static/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+
+
+        <script src="static/darkmodeJS/main.js"></script>
+
+        <script src="static/javascript-calculator-1/main.js"></script>
+        <script src="static/bootstrap-4.5.0-dist/jquery-3.5.1.slim.min.js"></script>
+        <script src="static/bootstrap-4.5.0-dist/popper.min.js"></script>
+        <script src="static/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+        <script>
+            //variables 
+            const listaProductos = document.getElementById('listaProductos');
+            let arrays = [];
+
+
+
+            //obtengo el query string de la url parq usarla de keys en le LS
+            var URLsearch = window.location.search;
+            //alert(URLsearch);
+            console.log(URLsearch);
+
+
+            /* se llama al bonton de la tabla para añadir un nuevo producto  */
+            function btn(idproducto, cate, nombre, precio) {
+
+                crearitems(idproducto, cate, nombre, precio);
+                arrays[0].cantidadProductos = arrays[0].cantidadProductos + 1; // sumamos 1 a la cantidad total
+                guardarLS();
+                /*Guardando los datos en el LocalStorage*/
+            }
+
+
+            /*e crea un items del prodcuto y se guarda en el arrays 
+             */
+            const crearitems = (idpro, cate, nombre, precio) => {
+
+                if (revisarExitencias(idpro, precio, nombre)) {
+                    console.log('existe');
+                } else {
+
+                    let item = {
+                        idpro: idpro,
+                        categoria: cate,
+                        nombre: nombre,
+                        precio: precio,
+                        montoCliente: precio,
+                        canti: 1
+
+                    }
+                    arrays.push(item);
+
+                }
+
+
+            }
+
+
+
+            /* revisa si existe el producto , de ser asi  suma los precios sino se agrega nuevo a la vista 
+            de productos del cliente 
+             */
+            function revisarExitencias(idproducto, prec, idInput) {
+
+                arrays = JSON.parse(localStorage.getItem(URLsearch));
+                if (arrays === null) {
+                    arrays = [];
+                    let cantidadProd = {
+                        cantidadProductos: 0
+                    }
+                    arrays.push(cantidadProd)
+                    return false;
+                } else {
+                    for (let i = 1; i < arrays.length; i++) {
+                        if (arrays[i].idpro == idproducto) {
+
+                            var monto = arrays[i].montoCliente
+                            var cantidad = arrays[i].canti
+                            monto = monto + prec;
+
+                            document.getElementById(idInput).value = monto;
+                            var sumaPrecios = parseInt(document.getElementById(idInput).value) || 0;
+
+                            arrays[i].montoCliente = sumaPrecios;
+                            arrays[i].canti = cantidad + 1;
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
+            }
+
+
+
+            /*efectua el guaradado en el localstorage del arrays en la key de la URL 
+             */
+            const guardarLS = () => {
+                //guarda  los datos en el localstorage y se parsea a cadena de string 
+                localStorage.setItem(URLsearch, JSON.stringify(arrays));
+                pintarProductos();
+                sumarPrecioPloforma();
+            }
+
+
+
+            /*se le envia el id de producto y se verifica el keys de localstorage y 
+            se elimina el producto selecioanado 
+             */
+            function removerProducto(idproducto) {
+                //  console.log(idproducto)
+                arrays = JSON.parse(localStorage.getItem(URLsearch));
+                for (let i = 1; i < arrays.length; i++) {
+                    if (arrays[i].idpro == idproducto) {
+                        arrays[0].cantidadProductos = arrays[0].cantidadProductos - arrays[i].canti; // extraemos el valor que ya tenia el almacenamiento local
+                        arrays.splice(i, 1);
+                    }
+                }
+                guardarLS();
+            }
+
+
+
+            /* sumar los precios de la proforma que se encuntra para dar el monto total de la ploforma
+            para luego enviarlo como valor quemado en la opcion de pagar en la ventana modal 
+             */
+            function sumarPrecioPloforma() {
+                //  console.log(idproducto)
+                let montoFacturar = 0;
+                var b = parseInt(document.getElementById("totalApagar").value) || 0;
+                // console.log(b);
+                arrays = JSON.parse(localStorage.getItem(URLsearch));
+                for (let i = 1; i < arrays.length; i++) {
+                    var totalFacturar = arrays[i].montoCliente
+                    montoFacturar += totalFacturar;
+
+                }
+                document.getElementById("totalApagar").value = montoFacturar;
+
+            }
+
+
+
+            /*estoy en proces de calcular los montos por cada que se hace un cambio en los input de los
+            prodcuctos del cliente 
+             */
+            function calcularMontos(idProduct, PrecioBase, idInput) {
+
+                var cantidad = parseInt(document.getElementById(idProduct).value) || 0;
+                //  console.log(idProduct, PrecioBase, cantidad);
+                arrays = JSON.parse(localStorage.getItem(URLsearch));
+                for (let i = 1; i < arrays.length; i++) {
+                    if (arrays[i].idpro == idProduct) {
+
+                        var monto = arrays[i].montoCliente
+
+                        monto = (cantidad * PrecioBase);
+
+                        document.getElementById(idInput).value = monto;
+                        var sumaPrecios = parseInt(document.getElementById(idInput).value) || 0;
+
+                        arrays[i].montoCliente = sumaPrecios;
+                        arrays[i].canti = cantidad;
+
+
+                    }
+                }
+
+                localStorage.setItem(URLsearch, JSON.stringify(arrays));
+                sumarPrecioPloforma();
+
+            }
+
+
+
+            /*pintar el response de la consulta de ajax .. se parsea la cedena de string y  se saca 
+            del diccionario  de python la key , valor correspondiente 
+             */
+            const pintarResponseAjax = (response) => {
+                if (response != null) {
+                    var idTabla = document.getElementById('tablaProductos');
+
+                    var idResponse = JSON.parse(response)
+
+                    document.getElementById('tablaProductos').innerHTML = `
+                  <table class="table table-hover table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="myTable">
+                `;
+
+
+                    for (var k in idResponse) {
+
+                        var idpro = idResponse[k]['idproducto']
+                        var nombre = idResponse[k]['nombre']
+                        var cate = idResponse[k]['categoria']
+                        var precio = idResponse[k]['precio']
+                        console.log(idpro, cate, nombre, precio);
+
+                        document.getElementById('tablaProductos').innerHTML += `
+                    
+                            <tr>
+
+                                <th scope="row"> <input style="font-size: 25px ;" class="form-control" id="colunma0" value="${idpro}" readonly></th>
+                                <td> <input style="font-size: 21px ;" class="form-control" id="colunma1" value="${cate}" readonly></td>
+                                <td> <input style="font-size: 21px ;" class="form-control" id="colunma2" value="${nombre}" readonly></td>
+                                <td> <input style="font-size: 21px ;" class="form-control" id="colunma3" value="${precio}" readonly></td>
+                                <td><input style="font-size: 21px ;" class="form-control" id="colunma4" value="" readonly></td>
+                                <td><button id="btnAgregarP" onclick="btn( ${idpro}, '${cate}', '${nombre}' ,${precio})" class="btn btn-success">Agregar +</button></td>
+
+                            </tr>
+                     
+                    `;
+
+                    }
+
+
+
+                }
+            }
+
+
+
+
+            /*hace la consulta asincrona a traves del protocolo http request 
+             envia los datos a la base de datos 
+             */
+            function proformaAjax(arrays) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/guardarProforma',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(arrays),
+                    success: function(response) {
+                        // alert("Data added successfully");
+                        alert(1024 * 1024 * 5 - unescape(encodeURIComponent(JSON.stringify(localStorage))).length);
+                        // console.log(response);
+                        // pintarResponseAjax(response);
+                        document.addEventListener('DOMContentLoaded', pintarResponseAjax(response));
+                    },
+                    error: function(error) {
+                        alert(error);
+                    }
+                });
+            }
+
+
+
+
+            /*llama al arrays correspondiente en cada URLsearh verifica que no sea nulo para facturar a 
+            traves de ajax 
+             */
+            function guardarProductos() {
+                arrays = JSON.parse(localStorage.getItem(URLsearch));
+                //console.log(arrays);
+                if (arrays === null) {
+                    arrays = [];
+                } else {
+                    //hace la consulta de ajax 
+                    proformaAjax(arrays);
+
+                }
+            }
+
+
+
+
+            /*
+            pintar los datos en el modal correspondiente , para ca
+             */
+            function cargarModalFacturando() {
+
+                var totalPagar = parseInt(document.getElementById("total-pagar").value) || 0,
+                    pagaCON = parseInt(document.getElementById("paga-con").value) || 0,
+                    totalProforma = parseInt(document.getElementById("totalApagar").value) || 0,
+                    CantiDolares = parseInt(document.getElementById("cantidadDolares").value) || 0,
+                    vuelto = parseInt(document.getElementById("vuelto").value) || 0;
+
+                //con un valor quemado del dolar 
+                var sumaDolares = 550 * CantiDolares;
+                var moneda = pagaCON - totalProforma + sumaDolares;
+
+                document.getElementById("total-pagar").value = totalProforma;
+                document.getElementById("vuelto").value = moneda;
+
+            }
+
+
+
+            /* pinta todos  los productos y es llamado desde el DOM  para que actuali el template sin refrescar */
+            const pintarProductos = () => {
+                //primero que se visualice vacio para no que no se vea el boceto basico 
+                listaProductos.innerHTML = '';
+                // se le asigan el valor del LS l arrays y se le pasa el keys 
+                arrays = JSON.parse(localStorage.getItem(URLsearch));
+                //console.log(arrays);
+                if (arrays === null) {
+                    arrays = [];
+                    let cantidadProd = {
+                        cantidadProductos: 0
+                    }
+                    arrays.push(cantidadProd)
+                } else {
+                    //arrays.forEach(Element => {
+                    for (let i = 1; i < arrays.length; i++) {
+                        //console.log(Element);
+                        listaProductos.innerHTML += ` 
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        
+                                            
+                                        <Strong> #  ${arrays[i].idpro} ,   ${arrays[i].nombre} , Prec ₡:  ${arrays[i].precio}</Strong>
+                                        <div class="row">
+                                            <div class="col-md-3 m-2">
+                                                <input type="number" class="form-control" id="${arrays[i].idpro}"   oninput="calcularMontos('${arrays[i].idpro}','${arrays[i].precio}','${arrays[i].nombre}')" value="${arrays[i].canti}" min="1" size="3">
+                                            </div>
+                                            <div class="col-md-4 m-2">
+                                                <input id="${arrays[i].nombre}" style="font-size: 23px ;"  type="number" value="${arrays[i].montoCliente}" class="form-control" readonly>
+                                            </div>
+                                            <div class="col-md-3 m-2">
+                                                <button  onclick="removerProducto('${arrays[i].idpro}')" class="btn btn-danger ">Remover</button>
+                                            </div>
+                                            
+                                        </div>
+                                               
+                                        
+                                            
+
+                                    </div>
+                                </div>
+                            `;
+                    }
+                    sumarPrecioPloforma();
+                }
+
+            }
+
+
+
+            //esccucha los eventos del DOM y pinta los productos sin recagar la pagina 
+            document.addEventListener('DOMContentLoaded', pintarProductos);
+        </script>
+
+
+
+
+        <script>
+            $(document).ready(function() {
+                $("#myInput").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
 </body>
+
+</html>
 
 </html>

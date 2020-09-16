@@ -1,0 +1,332 @@
+{% extends "Base.html" %} {% block content %} {{ super() }}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb col-6 col-md-4 mt-5 ml-2">
+            <li class="breadcrumb-item"><a href="/">Menú principal</a></li>
+            <li class="breadcrumb-item"><a href="caja">Caja</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Abrir Caja</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-center border-bottom">Abrir Caja</h1>
+    <div class="row">
+        <div class="col-12">
+            <form action="/nuevaCaja" method="POST">
+                <h2>Opciones principales</h2>
+                <div class="form-row border-bottom">
+                    <div class="col-12 col-md-4 mx-auto">
+
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Número de caja</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="157" readonly>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Usuario</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="Lady Ejemplo" readonly>
+                        </div>
+
+                    </div>
+                    <div class="col-12 col-md-4 mx-auto">
+
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Fecha y hora de
+                                    apertura</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="Junio 2, 2020" readonly>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Valor del dólar $</span>
+                            </div>
+                            <input type="number" name="ValorDolar" id="valorDolar" oninput="TotalCaja()" class="form-control" placeholder="0.0" aria-describedby="btnCambio" required>
+
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Preparar Fondo de Caja</h2>
+                <div class="form-group row">
+                    <div class="col-6 col-md-4 mx-auto">
+                        <h3>Dinero en colones (¢)</h3>
+                        <table class="table table-sm table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Moneda</th>
+                                    <th scope="col">Cantidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">¢ 5</th>
+                                    <td>
+                                        <input type="number" id="v5c" oninput="cal()" name="v5c" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">¢ 10</th>
+                                    <td>
+                                        <input type="number" id="v10c" oninput="cal()" name="v10c" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">¢ 25</th>
+                                    <td>
+                                        <input type="number" id="v25c" oninput="cal()" name="v25c" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">¢ 50</th>
+                                    <td>
+                                        <input type="number" id="v50c" oninput="cal()" name="v50c" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">¢ 100</th>
+                                    <td>
+                                        <input type="number" id="v100c" oninput="cal()" name="v100c" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">¢ 500</th>
+                                    <td>
+                                        <input type="number" id="v500c" oninput="cal()" name="v500c" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">¢ 1000</th>
+                                    <td>
+                                        <input type="number" id="v1c" oninput="cal()" name="v1000c" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">¢ 2000</th>
+                                    <td>
+                                        <input type="number" id="v2c" oninput="cal()" name="v2000c" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">¢ 5000</th>
+                                    <td>
+                                        <input type="number" id="v5000c" oninput="cal()" name="v5000c" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">¢ 10000</th>
+                                    <td>
+                                        <input type="number" id="v10000c" oninput="cal()" name="v10000c" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">¢ 20000</th>
+                                    <td>
+                                        <input type="number" id="v20c" oninput="cal()" name="v20000c" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">¢ 50000</th>
+                                    <td>
+                                        <input type="number" id="v50000c" oninput="cal()" name="v50000c" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-6 col-md-4 mx-auto">
+                        <h3>Dinero en dólares ($)</h3>
+                        <table class="table table-sm table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Moneda</th>
+                                    <th scope="col">Cantidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">$ 0.01</th>
+                                    <td>
+                                        <input type="number" id="v0.01d" oninput="sumaDolares()" name="v0.01d" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">$ 0.05</th>
+                                    <td>
+                                        <input type="number" id="v0.05d" oninput="sumaDolares()" name="v0.05d" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">$ 0.10</th>
+                                    <td>
+                                        <input type="number" id="v0.10d" oninput="sumaDolares()" name="v0.10d" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">$ 0.25</th>
+                                    <td>
+                                        <input type="number" id="v0.25d" oninput="sumaDolares()" name="v0.25d" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">$ 0.50</th>
+                                    <td>
+                                        <input type="number" id="v0.50d" oninput="sumaDolares()" name="v0.50d" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">$ 1</th>
+                                    <td>
+                                        <input type="number" id="v1d" oninput="sumaDolares()" name="v1d" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">$ 5</th>
+                                    <td>
+                                        <input type="number" id="v5d" oninput="sumaDolares()" name="v5d" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">$ 10</th>
+                                    <td>
+                                        <input type="number" id="v10d" oninput="sumaDolares()" name="v10d" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">$ 20</th>
+                                    <td>
+                                        <input type="number" id="v20d" oninput="sumaDolares()" name="v20d" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">$ 50</th>
+                                    <td>
+                                        <input type="number" id="v50d" oninput="sumaDolares()" name="v50d" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">$ 100</th>
+                                    <td>
+                                        <input type="number" id="v100d" oninput="sumaDolares()" name="v100d" class="form-control form-control-sm col-12 col-sm-6 col-md-4" placeholder="0" value="0" min="0">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="form-group row border-bottom m-2">
+                    <div class="col-5 col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="totalColones">Total en ¢</span>
+                            </div>
+                            <input id="sumaColones" oninput="TotalCaja()" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="0.00" readonly>
+                        </div>
+                    </div>
+                    <div class="col-7 col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Total de la caja en
+                                    ¢</span>
+                            </div>
+                            <input type="text" name="MontoTotalCaja" id="montoCajaAbrir" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="0.00" readonly>
+                        </div>
+                    </div>
+                    <div class="col-5 col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Total en $</span>
+                            </div>
+                            <input type="text" id="TotalDolares" oninput="TotalCaja()" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="0.00" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row m-3">
+                    <div class="col-12 col-md-4 mx-auto">
+                        <button class="btn btn-success btn-lg" type="submit" value="" name="btn">Abrir Caja</button>
+                        <a href="/caja" class="btn btn-danger btn-lg">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        //funcion que suma todas las monedas de colones 
+        function cal() {
+            try {
+                //jalo los datos si se reporta cambios en los input
+                var a = parseInt(document.getElementById("v20c").value) || 0, //20000
+                    b = parseInt(document.getElementById("v50000c").value) || 0, //50000
+                    c = parseInt(document.getElementById("v10000c").value) || 0, //10000
+                    d = parseInt(document.getElementById("v5000c").value) || 0, //5000
+                    e = parseInt(document.getElementById("v2c").value) || 0, //2000
+                    f = parseInt(document.getElementById("v1c").value) || 0, //1000
+                    g = parseInt(document.getElementById("v500c").value) || 0, //500
+                    h = parseInt(document.getElementById("v100c").value) || 0, //100
+                    i = parseInt(document.getElementById("v50c").value) || 0, //50
+                    j = parseInt(document.getElementById("v25c").value) || 0, //25
+                    k = parseInt(document.getElementById("v10c").value) || 0, //10
+                    l = parseInt(document.getElementById("v5c").value) || 0; //5
+
+                var totalColones = a * 20000 + b * 50000 + c * 10000 + d * 5000 + e * 2000 + f * 1000 +
+                    g * 500 + h * 100 + i * 50 + j * 25 + k * 10 + l * 5;
+
+                document.getElementById("sumaColones").value = totalColones;
+                //actualiza el valor el monto de la caja para reportar cambios en tiempos real 
+                TotalCaja();
+            } catch (e) {}
+        }
+
+        //suma los colones y dolres, para dar el monto de caja con el que se abre
+        function TotalCaja() {
+            try {
+                var a = parseInt(document.getElementById("TotalDolares").value) || 0,
+                    b = parseInt(document.getElementById("valorDolar").value) || 0,
+                    c = parseInt(document.getElementById("sumaColones").value) || 0;
+
+
+                var montoCajaTotal = c + (a * b);
+
+                document.getElementById("montoCajaAbrir").value = montoCajaTotal;
+            } catch (e) {}
+        }
+
+        //suma todas las monedas de dolares 
+        function sumaDolares() {
+            try {
+                //jalo los datos si se reporta cambios en los input
+                var a = parseInt(document.getElementById("v100d").value) || 0, //100
+                    b = parseInt(document.getElementById("v50d").value) || 0, //50
+                    c = parseInt(document.getElementById("v20d").value) || 0, //20
+                    d = parseInt(document.getElementById("v10d").value) || 0, //10
+                    e = parseInt(document.getElementById("v5d").value) || 0, //5
+                    f = parseInt(document.getElementById("v1d").value) || 0, //1
+                    g = parseInt(document.getElementById("v0.50d").value) || 0, //0.50
+                    h = parseInt(document.getElementById("v0.25d").value) || 0, //0.25
+                    i = parseInt(document.getElementById("v0.10d").value) || 0, //0.10
+                    j = parseInt(document.getElementById("v0.05d").value) || 0, //0.05
+                    k = parseInt(document.getElementById("v0.01d").value) || 0, //0.01
+                    valorDola = parseInt(document.getElementById("valorDolar").value) || 0; //0.01
+
+
+                var totalDolaresSumados = a * 100 + b * 50 + c * 20 + d * 10 +
+                    e * 5 + f * 1 +
+                    g * 0.50 + h * 0.25 + i * 0.10 + j * 0.05 + k * 0.01;
+
+                document.getElementById("TotalDolares").value = totalDolaresSumados;
+                //actualiza el valor el monto de la caja para reportar cambios en tiempos real 
+                TotalCaja();
+            } catch (e) {}
+        }
+    </script>
+
+
+</div>
+{% endblock %}

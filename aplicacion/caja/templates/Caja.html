@@ -1,0 +1,90 @@
+{% extends "Menu-Bar.html" %} {% block content %} {{ super() }}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb col-6 col-md-3 mt-5 ml-2">
+            <li class="breadcrumb-item"><a href="/MenuPrincipal">Menú principal</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Caja</li>
+        </ol>
+    </nav>
+    <h1>Opciones de Caja</h1>
+
+    <div class="row">
+        <div class="col-12 col-md-5 mx-auto">
+            <div class="card mx-auto" style="width: 23rem; margin: 5px;">
+                <div class="row no-gutters">
+                    <img src="static/img/abrirycerrar-caja.png" alt="IMAGEN" class="col-5 card-img p-3">
+                    <div class="col-7 card-body">
+                        <h5 class="card-title"> Abrir Caja </h5>
+                        <a href="/abrircaja" id="{{btnIdCaja}}" class="btn btn-primary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mx-auto" style="width: 23rem; margin: 5px;">
+                <div class="row no-gutters">
+                    <img src="static/img/abrirycerrar-caja.png" alt="IMAGEN" class="col-5 card-img p-3">
+                    <div class="col-7 card-body">
+                        <h5 class="card-title"> Cerrar Caja </h5>
+                        <a href="/cerrarcaja" id="{{btnidCajaCerrada}}" class="btn btn-primary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-5 mx-auto">
+            <div class="card mx-auto" style="width: 23rem; margin: 5px;">
+                <div class="row no-gutters">
+                    <img src="static/img/proforma-icon.png" class="col-5 card-img p-3" alt="IMAGEN">
+                    <div class="col-7 card-body">
+                        <h5 class="card-title"> Proformas </h5>
+                        <a href="/proformas" class="btn btn-primary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mx-auto" style="width: 23rem; margin: 5px;">
+                <div class="row no-gutters">
+                    <img src="static/img/proveedor-facturar.png" class="col-5 card-img p-3" alt="IMAGEN">
+                    <div class="col-7 card-body">
+                        <h5 class="card-title"> Facturar Proveedores </h5>
+                        <a href="#" class="btn btn-primary">Acceder</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    $("#accederCaja0").click(function() {
+        Swal.fire({
+            title: '<strong>TIENES CAJA ABIERTA !!</strong>',
+            icon: 'info',
+            showCloseButton: true,
+            showCancelButton: false,
+            focusConfirm: false,
+            confirmButtonText: '<i class="fa fa-thumbs-up"></i> ok!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+            cancelButtonAriaLabel: 'Thumbs down'
+        })
+    });
+    $("#cerrarCaja0").click(function() {
+        Swal.fire({
+            title: '<strong>Por Favor, habra caja</strong>',
+            icon: 'info',
+            showCloseButton: true,
+            showCancelButton: false,
+            focusConfirm: false,
+            confirmButtonText: '<i class="fa fa-thumbs-up"></i> ok!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+            cancelButtonAriaLabel: 'Thumbs down'
+        })
+    });
+</script>
+
+{% endblock %}k %}

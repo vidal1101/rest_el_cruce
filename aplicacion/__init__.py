@@ -9,6 +9,7 @@ from .proveedores import proveedores
 from .clientes import clientes
 from .productos import productos
 from .ventas_compras import proformas
+from .caja import caja
 
 db = SQLAlchemy()
 
@@ -31,6 +32,7 @@ def create_app():
     from .usuarios.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
+
     app.register_blueprint(categorias)
     app.register_blueprint(inicio)
     app.register_blueprint(contabilidad)
@@ -39,4 +41,5 @@ def create_app():
     app.register_blueprint(clientes)
     app.register_blueprint(productos)
     app.register_blueprint(proformas)
+    app.register_blueprint(caja)
     return app

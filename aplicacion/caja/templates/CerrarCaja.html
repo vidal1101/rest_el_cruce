@@ -1,0 +1,146 @@
+{% extends "Base.html" %} {% block content %} {{ super() }}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb col-12 col-md-4 mt-3">
+            <li class="breadcrumb-item"><a href="/">Menú principal</a></li>
+            <li class="breadcrumb-item"><a href="caja">Caja</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cerrar Caja</li>
+        </ol>
+    </nav>
+
+    <h1 class="text-center">Cierre de Caja</h1>
+    <p>Nota: Una vez cerrada la caja no podrá revertir los cambios.</p>
+    <div class="row">
+        <div class="col-12 col-md-10 mx-auto">
+            <table class="table border table-bordered">
+                <caption>Datos principales</caption>
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Fondo inicial</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3 Agosto 2020</td>
+                        <td>Lady</td>
+                        <td>¢56,320.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-10 mx-auto">
+            <table class="table border table-bordered">
+                <caption>Montos y promedio</caption>
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Datáfono</th>
+                        <th scope="col">Sistema</th>
+                        <th scope="col">Promedio en ventas</th>
+                        <th scope="col">Total de facturas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>¢68,320.05</td>
+                        <td id="system" oninput="cal()">¢479,0000.00</td>
+                        <td>¢268,000.00</td>
+                        <td>114</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12 col-md-6  mx-auto">
+            <form id="idFormulario" action="#" method="POST">
+                <div class="form-row">
+                    <!--esto es una prueba -->
+                    <div class="col-12">
+                        <label for="monto-usuario">Monto de Sistema</label>
+                        <input type="text" class="form-control" id="monto-sistema" value="355000" oninput="cal()" readonly>
+                    </div>
+                    <div class="col-6">
+                        <label for="monto-usuario">Monto del usuario</label>
+                        <input type="text" class="form-control" id="monto-usuario" oninput="cal()">
+                    </div>
+                    <div class="col-6">
+                        <label for="diferencia">Diferencia (Usuario - Sistema)</label>
+                        <input type="text" class="form-control" id="diferencia" value="¢0.0" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12">
+                        <label for="observaciones">Observaciones</label>
+                        <textarea class="form-control" id="observaciones" name="observaciones">Ninguna observación.</textarea>
+                    </div>
+                </div>
+                <div class="form-row m-2">
+                    <div class="col-6">
+                        <button class="btn btn-success btn-lg col-12" type="button" id="btnCerrarCaja" name="btn">Cerrar Caja</button>
+                    </div>
+                    <div class="col-6">
+                        <a href="/caja" class="btn btn-danger btn-lg col-12">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function cal() {
+            try {
+                var a = parseInt(document.getElementById("monto-sistema").value) || 0,
+                    b = parseInt(document.getElementById("monto-usuario").value) || 0;
+
+
+                document.getElementById("diferencia").value = b - a;
+            } catch (e) {}
+        }
+        //alerta de confirmacion antes de cerrar caja 
+        $("#btnCerrarCaja").click(function() {
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Desea Cerrar la Caja?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'SI, Cerrar',
+                cancelButtonText: 'No,Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+
+                    swalWithBootstrapButtons.fire(
+                        'Cerrada caja!',
+                        'Your file has been deleted.',
+                        'success'
+                        ("#idFormulario").attr('action', '{{url_for("caja")}}')
+                    )
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Your imaginary file is safe :)',
+                        'error'
+                    )
+                }
+            })
+        });
+    </script>
+
+</div>
+{% endblock %}
