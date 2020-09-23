@@ -15,7 +15,7 @@
                     <img src="static/img/abrirycerrar-caja.png" alt="IMAGEN" class="col-5 card-img p-3">
                     <div class="col-7 card-body">
                         <h5 class="card-title"> Abrir Caja </h5>
-                        <a href="/abrircaja" id="{{btnIdCaja}}" class="btn btn-primary">Acceder</a>
+                        <button onclick="verificarCaja(abrirCaja)" type="button" class="btn btn-primary">Acceder</button>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                     <img src="static/img/abrirycerrar-caja.png" alt="IMAGEN" class="col-5 card-img p-3">
                     <div class="col-7 card-body">
                         <h5 class="card-title"> Cerrar Caja </h5>
-                        <a href="/cerrarcaja" id="{{btnidCajaCerrada}}" class="btn btn-primary">Acceder</a>
+                        <button onclick="verificarCaja(cerrarCaja)" type="button" class="btn btn-primary">Acceder</button>
                     </div>
                 </div>
             </div>
@@ -59,32 +59,83 @@
 
 
 <script>
-    $("#accederCaja0").click(function() {
-        Swal.fire({
-            title: '<strong>TIENES CAJA ABIERTA !!</strong>',
-            icon: 'info',
-            showCloseButton: true,
-            showCancelButton: false,
-            focusConfirm: false,
-            confirmButtonText: '<i class="fa fa-thumbs-up"></i> ok!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down'
-        })
-    });
-    $("#cerrarCaja0").click(function() {
-        Swal.fire({
-            title: '<strong>Por Favor, habra caja</strong>',
-            icon: 'info',
-            showCloseButton: true,
-            showCancelButton: false,
-            focusConfirm: false,
-            confirmButtonText: '<i class="fa fa-thumbs-up"></i> ok!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down'
-        })
-    });
+    /*
+        Se utiliza para verificar la caja y luego ejecutar la función que reciba por parámetro
+    */
+    async function verificarCaja(funcEjecutar) {
+
+        let response = await fetch('/verificar-caja', null);
+
+        if (response.ok) { // si el estado de la respuesta es 200
+
+            let json = await response.json();
+            console.log('Valor extraído, estado:', response.status);
+            funcEjecutar(json['estado']);
+
+        } else if (response.status == 500) {
+            swal("Oops", "Algo anda mal D: \n¡Revisa el servidor!" + response.status, "error");
+        } else {
+            console.log('Advertencia, algo no anda bien pero funciona.');
+        }
+    }
+
+    function abrirCaja(estado) {
+        'use strict';
+        /*
+            Se llama para abrir la caja, si está cerrada procede a abrir la caja, 
+            si está abierta pregunta si desea cerrarla
+        */
+        if (!estado) {
+
+            location.href = "/abrir-caja";
+
+        } else {
+
+            swal({
+                title: "¿La Caja ya está abierta, desea cerrarla?",
+                text: "Recuerda que no deberías cerrar la caja si aún no terminas las ventas.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((desicion) => {
+                if (desicion) {
+                    /*swal("Se te enviará a la gráfica para abrir la caja", {
+                        icon: "success",
+                    });*/
+                    location.href = "/cerrar-caja";
+                }
+            });
+        }
+
+    }
+
+    function cerrarCaja(estado) {
+        'use strict';
+        /*
+            Se llama para cerrar la caja, si está abierta procede a cerrarla, 
+            si está cerrada pregunta si desea abrirla
+        */
+        if (estado) {
+
+            location.href = "/cerrar-caja";
+
+        } else {
+            swal({
+                title: "¿La Caja ya está cerrada, desea abrirla?",
+                text: "-",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((desicion) => {
+                if (desicion) {
+                    /*swal("Se te enviará a la gráfica para abrir la caja", {
+                        icon: "success",
+                    });*/
+                    location.href = "/abrir-caja";
+                }
+            });
+        }
+    }
 </script>
 
-{% endblock %}k %}
+{% endblock %}

@@ -1,28 +1,28 @@
 /*
- * Scripts de procedimientos, triggers y demás para la tabla Caja
- * stp apertura de caja			 -> stp_abrirCaja
- * stp cierre de caja			 -> stp_cerrarCaja
- * stp mostrar caja con facturas -> stp_mostrarCajaFacturas
- * stp mostrar solamente la caja -> stp_mostrarCajaBasica
+ * Scripts de procedimientos, triggers y demás para la tabla caja
+ * stp apertura de caja			 -> stp_abrircaja
+ * stp cierre de caja			 -> stp_cerrarcaja
+ * stp mostrar caja con facturas -> stp_mostrarcajaFacturas
+ * stp mostrar solamente la caja -> stp_mostrarcajaBasica
  */
  
  -- stp abrir caja
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_abrirCaja`(
-IN  $idTrabajador INT,
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_abrircaja`(
+IN  $idtrabajador INT,
 IN  $valorDolar   DOUBLE(10,2),
-IN  $fondoCaja    DOUBLE(10,2)
+IN  $fondocaja    DOUBLE(10,2)
 -- OUT $mensaje 	  VARCHAR(50),
 -- OUT $apertura     BOOLEAN
 )
 BEGIN 
 	
-    IF EXISTS (SELECT cedula FROM Trabajador WHERE cedula = $idTrabajador) THEN
+    IF EXISTS (SELECT cedula FROM trabajador WHERE cedula = $idtrabajador) THEN
     
-		INSERT INTO Caja (idTrabajador, fechaApertura, valorDolar, fondoCaja, estado)
-			VALUES ($idTrabajador, NOW(), $valorDolar, $fondoCaja, 'Abierta');
+		INSERT INTO caja (idtrabajador, fechaApertura, valorDolar, fondocaja, estado)
+			VALUES ($idtrabajador, NOW(), $valorDolar, $fondocaja, 'Abierta');
             
--- 		SET $mensaje  = 'Caja abierta.';
+-- 		SET $mensaje  = 'caja abierta.';
 --        SET $apertura = 1;
 --    ELSE 
 		
@@ -36,9 +36,9 @@ DELIMITER ;
 
  -- stp cerrar caja
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_cerrarCaja`(
-IN  $idCaja 	   INT,
-IN  $idTrabajador  INT,
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_cerrarcaja`(
+IN  $idcaja 	   INT,
+IN  $idtrabajador  INT,
 IN  $montoUsuario  DOUBLE(10,2),
 IN  $diferencia    DOUBLE(10,2),
 IN  $observaciones TEXT
@@ -46,18 +46,18 @@ IN  $observaciones TEXT
 -- OUT $encontrada    BOOLEAN
 )
 BEGIN 
-	IF EXISTS (SELECT idCaja, idTrabajador FROM Caja
-		WHERE idTrabajador = $idTrabajador AND idCaja = $idCaja) THEN 
+	IF EXISTS (SELECT idcaja, idtrabajador FROM caja
+		WHERE idtrabajador = $idtrabajador AND idcaja = $idcaja) THEN 
 		
-        UPDATE Caja SET
+        UPDATE caja SET
 				fechaCierre   = NOW(),
 				montoUsuario  = $montoUsuario,
 				diferencia    = $diferencia,
 				observaciones = $observaciones,
 				estado        = 'Cerrada'
-			WHERE idCaja = $idCaja AND idTrabajador = $idTrabajador;
+			WHERE idcaja = $idcaja AND idtrabajador = $idtrabajador;
         
---      SET $mensaje  = 'Caja cerrada exitosamente.';
+--      SET $mensaje  = 'caja cerrada exitosamente.';
 --      SET $encontrada = 1;
         
 --    ELSE
@@ -71,16 +71,16 @@ DELIMITER ;
 -- Muestra la caja junto con las facturas de venta y compra
 -- Puede que debamos dividir estos datos en 2 partes
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarCajaFacturas`(
-IN  $idCaja       INT,
-IN  $idTrabajador INT
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarcajaFacturas`(
+IN  $idcaja       INT,
+IN  $idtrabajador INT
 -- OUT $mensaje      VARCHAR(50),
 -- OUT $encontrada   BOOLEAN
 )
 BEGIN
 
-	IF EXISTS (SELECT cedula FROM Trabajador
-		WHERE Trabajador.cedula = $idTrabajador AND Caja.idCaja = $idCaja) THEN
+	IF EXISTS (SELECT cedula FROM trabajador
+		WHERE trabajador.cedula = $idtrabajador AND caja.idcaja = $idcaja) THEN
         SELECT
 			usuario.cedula, -- Cédula del usuario
 			usuario.nombre, -- Nombre del usuario
@@ -106,18 +106,18 @@ BEGIN
             factClie.estado,
             
             -- Facturas de las compras
-            factProvee.idFacturaProveedor,
+            factProvee.idfacturaproveedor,
             factProvee,fechaCompra,
             factProvee.estado,
             factProvee.totalPago
             
-		FROM Caja AS caja 
-         JOIN Trabajador AS usuario
-         INNER JOIN FacturaCliente   AS factClie   ON caja.idCaja = factClie.idCaja
-         INNER JOIN FacturaProveedor AS factProvee ON caja.idCaja = factProvee.idCaja
-        WHERE caja.idCaja = $idCaja;
+		FROM caja AS caja 
+         JOIN trabajador AS usuario
+         INNER JOIN facturacliente   AS factClie   ON caja.idcaja = factClie.idcaja
+         INNER JOIN facturaproveedor AS factProvee ON caja.idcaja = factProvee.idcaja
+        WHERE caja.idcaja = $idcaja;
         
--- 		SET $mensaje    = 'Caja encontrada.';
+-- 		SET $mensaje    = 'caja encontrada.';
 --      SET $encontrada = 1;
         
 -- 	ELSE 
@@ -130,15 +130,15 @@ DELIMITER ;
 
 -- Muestra solamente los datos de la caja y del usuario relacionado
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarCajaBasica`(
-IN  $idCaja       INT,
-IN  $idTrabajador INT
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarcajaBasica`(
+IN  $idcaja       INT,
+IN  $idtrabajador INT
 -- OUT $mensaje      VARCHAR(50),
 -- OUT $encontrada   BOOLEAN
 )
 BEGIN
-	IF EXISTS (SELECT idcaja, idTrabajador FROM Caja
-		WHERE idTrabajador = $idTrabajador AND idCaja = $idCaja) THEN
+	IF EXISTS (SELECT idcaja, idtrabajador FROM caja
+		WHERE idtrabajador = $idtrabajador AND idcaja = $idcaja) THEN
 		SELECT
 			usuario.cedula, -- Cédula del usuario
 			usuario.nombre, -- Nombre del usuario
@@ -147,7 +147,7 @@ BEGIN
 			caja.fechaApertura,
             caja.fechaCierre,
             
-			caja.fondoCaja,
+			caja.fondocaja,
 			caja.valorDolar,
             
 			caja.montoDatafono,
@@ -161,11 +161,11 @@ BEGIN
 			caja.observaciones,
 			caja.estado
             
-		FROM Caja AS caja
-         JOIN Trabajador AS usuario
-        WHERE caja.idCaja = $idCaja;
+		FROM caja AS caja
+         JOIN trabajador AS usuario
+        WHERE caja.idcaja = $idcaja;
         
---      SET $mensaje  = 'Caja encontrada.';
+--      SET $mensaje  = 'caja encontrada.';
 --      SET $encontrada = 1;
         
 -- 	ELSE 
@@ -175,50 +175,46 @@ BEGIN
 END //
 DELIMITER ;
 
-
-
-
 delimiter $$
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_nuevaCaja`(
-in $idTrabajador int(11),
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_nuevacaja`(
+in $idtrabajador int(11),
 in $fechaHora datetime,
-in $fondoCaja double(10,2),
+in $fondocaja double(10,2),
 in $valorDolar double(10,2),
 in $estado varchar(10)
 )
 BEGIN
      
-	insert into caja( idTrabajador,fechaApertura,fondoCaja,valorDolar,estado)
-    values( $idTrabajador,$fechaHora,$fondoCaja,$valorDolar,$estado);
+	insert into caja( idtrabajador,fechaApertura,fondocaja,valorDolar,estado)
+    values( $idtrabajador,$fechaHora,$fondocaja,$valorDolar,$estado);
 END$$
 delimiter ;
 
 
 delimiter $$
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_verEstadoCajas`()
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_verEstadocajas`()
 BEGIN
-	DECLARE numUltimoCaja int(11);
-    set numUltimoCaja = (select max(idCaja) as num_Caja   from caja );
+	DECLARE numUltimocaja int(11);
+    set numUltimocaja = (select max(idcaja) as num_caja   from caja );
     
-    if exists(select idCaja , idTrabajador, estado from caja where idCaja = numUltimoCaja  
+    if exists(select idcaja , idtrabajador, estado from caja where idcaja = numUltimocaja  
 		and estado ='abierta' ) then
   
-			select 'cajaAbierta',numUltimoCaja;
+			select 'cajaAbierta',numUltimocaja;
 	else 
-			select 'cajaCerrada',numUltimoCaja;
+			select 'cajaCerrada',numUltimocaja;
    end if;
     
 END$$
 delimiter ;
 
 
-delimiter $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `stp_mostrarProductosCaja`()
+DELIMITER $$
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarProductoscaja`()
 BEGIN
 		select pro.idProducto , cate.nombreCate , pro.nombre , pro.precioVenta
 		from producto as pro inner join categoria as cate 
-		on pro.idCategoria = cate.idCategoria where pro.idCategoria = cate.idCategoria
+		on pro.idcategoria = cate.idcategoria where pro.idcategoria = cate.idcategoria
 		order by pro.idProducto;
-END
-delimiter ;
-
+END $$
+DELIMITER ;

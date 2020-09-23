@@ -1,12 +1,12 @@
 /*
- * Script de la tabla Trabajador, donde valida el login
+ * Script de la tabla trabajador, donde valida el login
  * stp de recibe los datos CEDULA, CONTRASEÑA
  * Verifica si existe algún registro.
  *	SI: Retorna los datos del usuario
  *	NO: Retorna falso 
  */
 
-DELIMITER //                 #spt de Login
+DELIMITER //
 CREATE DEFINER = `adminRestBar`@`localhost` PROCEDURE `pa_login`(
 IN pcedula INT,
 IN pcontrasena TEXT
@@ -16,10 +16,10 @@ IN pcontrasena TEXT
 
 BEGIN
 
-	IF EXISTS (SELECT cedula FROM Trabajador 
+	IF EXISTS (SELECT cedula FROM trabajador 
 			   WHERE contrasenia = $pcontrasena AND cedula = $pcedula) THEN
 		
-        SELECT cedula, nombre, puesto FROM Trabajador 
+        SELECT cedula, nombre, puesto FROM trabajador 
 			   WHERE contrasenia = $pcontrasena AND cedula = $pcedula;
 -- 		SET $existe  = 1;
 --      SET $mensaje = 'Usuario encontrado.';

@@ -24,17 +24,17 @@ BEGIN
 	CASE $tabla 
     -- Inner Join, aunque esta consulta puede ser separa por su gran cantidad de información a mostrar
 -- 		WHEN 'caja' THEN 
--- 			SElECT cedula, nombre, puesto, estado FROM `Caja`;
+-- 			SElECT cedula, nombre, puesto, estado FROM `caja`;
 		
 		WHEN 'usuarios' THEN 
-			SElECT cedula, nombre, puesto, estado FROM `Trabajador`;
+			SElECT cedula, nombre, puesto, estado FROM `trabajador`;
         
         WHEN 'clientes' THEN
-			SELECT cedula, nombre, empresa, email, observacion, estado FROM `Cliente`;
+			SELECT cedula, nombre, empresa, email, observacion, estado FROM `cliente`;
             
         -- En el caso de productos, seria inventario
         WHEN 'categorias' THEN 
-			SELECT idCategoria, nombreCate, descripcion, estado, categorias FROM `Categoria`;
+			SELECT idcategoria, nombreCate, descripcion, estado, nombreFoto FROM `categoria`;
         
         -- Inner Join
         WHEN 'inventario' THEN 
@@ -43,32 +43,32 @@ BEGIN
 				   prod.precioCompra, prod.precioVenta, prod.utilidad, prod.iva, 
 				   prod.descripcion, prod.estado
 				FROM `Producto` AS prod
-					INNER JOIN `Categoria`  AS cat  ON cat.idCategoria = prod.idCategoria
-                    INNER JOIN `Inventario` AS inve ON inve.idProducto = prod.idProducto;
+					INNER JOIN `categoria`  AS cat  ON cat.idcategoria = prod.idcategoria
+                    INNER JOIN `inventario` AS inve ON inve.idProducto = prod.idProducto;
 		
         WHEN 'proveedores' THEN
-			SELECT idProveedor, cedulaJuridi, empresa AS `nom. empresa`,
-            telefono, direccion, descripcion, estado FROM `Proveedor`;
+			SELECT idproveedor, cedulaJuridi, empresa AS `nom. empresa`,
+            telefono, direccion, descripcion, estado FROM `proveedor`;
 		
 		-- Inner Join 
 		WHEN 'facturas clientes' THEN
-			SELECT fact.idFactura AS `ID factura`, fact.idCaja AS `ID caja`, cli.nombre AS `nom. cliente`,
-				   fact.descripCliente, fact.lugarConsumo, trab.nombre AS `atend. por`, fact.fechaFacturado,
+			SELECT fact.idFactura AS `ID factura`, fact.idcaja AS `ID caja`, cli.nombre AS `nom. cliente`,
+				   fact.descripcliente, fact.lugarConsumo, trab.nombre AS `atend. por`, fact.fechaFacturado,
 				   fact.electronica AS `fact. electronica`, fact.tipoPago, fact.moneda, fact.digitosTarjeta,
 				   fact.totalPago AS `cobrado`, fact.diferencia AS `vuelto`, fact.estado AS `estado factura`
-				FROM `FacturaCliente` AS fact
-					INNER JOIN `Trabajador` AS trab ON trab.cedula = fact.idTrabajador
-					INNER JOIN `Cliente`    AS cli  ON cli.cedula = fact.idCliente;
+				FROM `facturacliente` AS fact
+					INNER JOIN `trabajador` AS trab ON trab.cedula = fact.idtrabajador
+					INNER JOIN `cliente`    AS cli  ON cli.cedula = fact.idcliente;
             
         -- Inner Join 
         WHEN 'facturas proveedores' THEN
-			SELECT fact.idFacturaProveedor AS `ID factura`, fact.idCaja AS `ID caja`,
+			SELECT fact.idFacturaproveedor AS `ID factura`, fact.idcaja AS `ID caja`,
 				   prov.empresa AS `proveedor`, fact.fechaCompra AS `comprado el dia`,
                    fact.fechaFacturacion AS `facturado el dia`, trab.nombre AS `realizado  por`,
                    fact.estado, fact.totalPago AS `cant. pagada`
-				FROM `FacturaProveedor` AS fact
-					INNER JOIN `Proveedor` AS prov ON prov.idProveedor = fact.idProveedor
-					INNER JOIN `Trabajador` AS trab ON trab.cedula = fact.cedTrabajador;
+				FROM `Facturaproveedor` AS fact
+					INNER JOIN `proveedor` AS prov ON prov.idproveedor = fact.idproveedor
+					INNER JOIN `trabajador` AS trab ON trab.cedula = fact.cedtrabajador;
 --     ELSE 
 -- 		SET $mensaje = 'No existe la tabla solicitada.';
     END CASE;

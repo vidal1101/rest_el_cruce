@@ -3,7 +3,6 @@ from aplicacion.Database import Mysql
 import os.path as path
 import base64
 
-#insert categorias
 def registrar_categoria(request):
     """
         Se registra una nueva categoría, dependiendo si tiene o no foto.
@@ -24,7 +23,6 @@ def registrar_categoria(request):
     else:
         conex.execute_procedure("stp_insertarCategoria",[nombre_categoria,descrip,estado])
 
-# Reparar el metodo para modificar la categoria
 def modificar_categoria(request):
     """
         Se actualizan los campos de la categoría.
@@ -44,11 +42,11 @@ def mostrar_categorias():
     cate = 'categorias'
     conex = Mysql()
     resulset  = conex.call_store_procedure_return("stp_mostrarRegistros", [cate])
-    for categoria in resulset:
-       verificar_foto(categoria[4], categoria[0])
+    if (resulset != [] and resulset != [[]]):
+        for categoria in resulset:
+            verificar_foto(categoria[4], categoria[0])
     return resulset
 
-#cambio el estado de las categorias
 def cambiar_estado(idcate):
     """
         Se cambia el estado de una categoría exclusivamente por su ID.
@@ -96,7 +94,8 @@ def verificar_foto(nombre_foto, id_categoria):
     """
     # Obtenemos la ruta de la foto en el disco duro...
     if (nombre_foto != None and nombre_foto != ''):
-        ruta = '/home/dreads/Documentos/proyectos/software_restaurante/app_rest_blueprints/aplicacion/static/img/categorias/' + nombre_foto
+        import os
+        ruta = os.getcwd() + '/aplicacion/static/img/categorias/' + nombre_foto
         if (path.exists(ruta) == False):
             foto_archivo = open(ruta, 'wb')
             mysql = Mysql()

@@ -1,14 +1,14 @@
 /*
- * Script de la tabla Cliente
- * stp de insertar			 -> stp_insertarCliente
- * stp de modificar 		 -> stp_modificarCliente
- * stp de cambiar estado     -> stp_cambiarEstadoCliente
- * stp de mostrar un cliente -> stp_mostrarCliente
+ * Script de la tabla cliente
+ * stp de insertar			 -> stp_insertarcliente
+ * stp de modificar 		 -> stp_modificarcliente
+ * stp de cambiar estado     -> stp_cambiarEstadocliente
+ * stp de mostrar un cliente -> stp_mostrarcliente
  */
  
 -- spt de insertar
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_insertarCliente`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_insertarcliente`(
 IN  $pcedula    VARCHAR(50),
 IN  $pnombre    VARCHAR(45),
 IN  $pempresa   VARCHAR(50),
@@ -19,12 +19,12 @@ IN  $pestado    VARCHAR(10)
 -- OUT $pinsertado BOOLEAN
 )
 BEGIN
-	IF NOT EXISTS (SELECT cedula FROM Cliente WHERE cedula = $pcedula) THEN
+	IF NOT EXISTS (SELECT cedula FROM cliente WHERE cedula = $pcedula) THEN
 		
-        INSERT INTO Cliente (cedula, nombre, empresa, email, observacion, estado)
+        INSERT INTO cliente (cedula, nombre, empresa, email, observacion, estado)
 			VALUES ($pcedula, $pnombre, $pempresa, $pemail, $pobser, $pestado);
 -- 		SET $pinsertado = 1;
--- 		SET $pmensaje   = 'Cliente registrado.';
+-- 		SET $pmensaje   = 'cliente registrado.';
         
 --    ELSE
 		
@@ -37,7 +37,7 @@ DELIMITER ;
 
 -- stp de modificar 
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_modificarCliente`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_modificarcliente`(
 IN  $cedula 	VARCHAR(50),
 IN  $nombre 	VARCHAR(45),
 IN  $empresa	VARCHAR(50),
@@ -48,9 +48,9 @@ IN  $estado 	VARCHAR(10)
 -- OUT $encontrado BOOLEAN
 )
 BEGIN
-	IF EXISTS (SELECT cedula FROM Cliente WHERE cedula = $cedula) THEN
+	IF EXISTS (SELECT cedula FROM cliente WHERE cedula = $cedula) THEN
         
-		UPDATE Cliente SET
+		UPDATE cliente SET
 				nombre      = $nombre,
                 empresa     = $empresa,
                 email		= $email,
@@ -58,10 +58,10 @@ BEGIN
                 observacion = $obser
 			WHERE cedula    = $cedula;
             
---            SET $mensaje    = 'Cliente modificado.';
+--            SET $mensaje    = 'cliente modificado.';
 --            SET $encontrado = 1;
 --    ELSE
--- 		SET $mensaje    = 'Error. Cliente no encontrado.';
+-- 		SET $mensaje    = 'Error. cliente no encontrado.';
 --      SET $encontrado = 0;
         
     END IF;
@@ -70,7 +70,7 @@ DELIMITER ;
 
 -- stp de cambiar el estado
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_cambiarEstadoCliente`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_cambiarEstadocliente`(
 IN  $cedula     VARCHAR(50)
 -- OUT $mensaje    VARCHAR(50)
 -- OUT $encontrado BOOLEAN
@@ -80,29 +80,29 @@ BEGIN
 DECLARE estadoActual VARCHAR(10);
 
 -- Verificamos si el usuario existe y si existe obtenemos su estado
-		IF EXISTS (SELECT cedula FROM Cliente WHERE cedula = $cedula) THEN
+		IF EXISTS (SELECT cedula FROM cliente WHERE cedula = $cedula) THEN
 			
             -- Revisamos el estado actual del registro
-			SET estadoActual = (SELECT estado FROM Cliente WHERE cedula = $cedula);
+			SET estadoActual = (SELECT estado FROM cliente WHERE cedula = $cedula);
             
             -- Cambiamos el estado
             IF (estadoActual = 'Activo') THEN
             
 				SET estadoActual = 'Inactivo';
--- 				SET $mensaje     = 'Cliente desactivado.';
+-- 				SET $mensaje     = 'cliente desactivado.';
                 
             ELSE
             
 				SET estadoActual = 'Activo';
--- 				SET $mensaje     = 'Cliente activado.';
+-- 				SET $mensaje     = 'cliente activado.';
                 
             END IF;
 			
-            UPDATE Cliente SET estado = estadoActual WHERE cedula = $cedula;
+            UPDATE cliente SET estado = estadoActual WHERE cedula = $cedula;
 -- 			SET $encontrado = 1;
             
 -- 		ELSE
--- 			SET $mensaje    ='Error. Cliente no encontrado.';
+-- 			SET $mensaje    ='Error. cliente no encontrado.';
 -- 			SET $encontrado = 0;
 		END IF;
 END //
@@ -110,20 +110,20 @@ DELIMITER ;
 
 -- stp de mostrar un cliente
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarCliente`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarcliente`(
 IN  $cedula     VARCHAR(50)
 -- OUT $mensaje    VARCHAR(50),
 -- OUT $encontrado BOOLEAN
 )
 BEGIN
-	IF ((SELECT COUNT(cedula) FROM Cliente 
+	IF ((SELECT COUNT(cedula) FROM cliente 
 			WHERE cedula = $cedula) > 0) THEN
     
-		SELECT cedula, nombre, empresa, email, observacion, estado FROM Cliente WHERE cedula = $cedula;
---         SET $mensaje = 'Cliente encontrado.';
+		SELECT cedula, nombre, empresa, email, observacion, estado FROM cliente WHERE cedula = $cedula;
+--         SET $mensaje = 'cliente encontrado.';
 --         SET $encontrado = 1;
 -- 	ELSE
--- 		SET $mensaje = 'Error. Cliente no encontrado.';
+-- 		SET $mensaje = 'Error. cliente no encontrado.';
 --      SET $encontrado = 0;
     END IF;
 END //

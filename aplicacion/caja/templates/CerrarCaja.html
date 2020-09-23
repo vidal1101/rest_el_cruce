@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb col-12 col-md-4 mt-3">
             <li class="breadcrumb-item"><a href="/">Menú principal</a></li>
-            <li class="breadcrumb-item"><a href="caja">Caja</a></li>
+            <li class="breadcrumb-item"><a href="/caja">Caja</a></li>
             <li class="breadcrumb-item active" aria-current="page">Cerrar Caja</li>
         </ol>
     </nav>
@@ -103,42 +103,7 @@
         }
         //alerta de confirmacion antes de cerrar caja 
         $("#btnCerrarCaja").click(function() {
-
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false
-            })
-
-            swalWithBootstrapButtons.fire({
-                title: 'Desea Cerrar la Caja?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'SI, Cerrar',
-                cancelButtonText: 'No,Cancelar',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.value) {
-
-                    swalWithBootstrapButtons.fire(
-                        'Cerrada caja!',
-                        'Your file has been deleted.',
-                        'success'
-                        ("#idFormulario").attr('action', '{{url_for("caja")}}')
-                    )
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    )
-                }
-            })
+            console.log('Cerrando caja...');
         });
     </script>
 

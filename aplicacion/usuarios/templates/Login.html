@@ -1,71 +1,92 @@
-{% extends "Base.html" %}
-{% block content %}
-{{ super() }}
-<div class="container">
-    <div class="row">
-        <div class="col-12 col-sm-6 col-md-4 mx-auto">
+<!DOCTYPE html>
+<html lang="es">
 
-            <h1 class="m-2 text-center">Iniciar Sesión</h1>
+<head>
 
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <div class="notification is-danger">
-                {{ messages[0] }}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="static/bootstrap-4.5.0-dist/css/bootstrap.min.css">
+    <script src="static/jquery.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Iniciar sesión</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-11 col-sm-10 col-md-4 mx-auto mt-5 border border-success rounded">
+
+                <h1 class="m-2 text-center">Iniciar Sesión</h1>
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="notification is-danger">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Revisa tus credenciales.</strong>
+                        <br> Se ha denegado el acceso, por favor revisa o comunícate con la persona encargada.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                <form class="needs-validation" action="login" method="POST" novalidate>
+
+                    <div class="mb-3">
+                        <label for="ced">Cédula</label>
+                        <input type="number" class="form-control" name="cedula" id="ced"
+                            placeholder="Cédula sin guiones" required>
+                        <div class="valid-feedback">
+                            Formato correcto.
+                        </div>
+                        <div class="invalid-feedback">
+                            Incorrecto, digite la cédula sin espacios y sin guiones.
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="contr">Contraseña</label>
+                        <input type="password" class="form-control" name="contrasena" id="contr" placeholder="****"
+                            required>
+                        <div class="invalid-feedback">
+                            No puede dejar este campo vacío.
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 mb-3">
+                            <button class="btn btn-success btn-lg col-12" type="submit">Iniciar Sesión</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            {% endif %}
-            {% endwith %}
-
-            <form class="needs-validation" action="login" method="POST" novalidate>
-
-                <div class="mb-3">
-                    <label for="ced">Cédula</label>
-                    <input type="number" class="form-control" name="cedula" id="ced" required>
-                    <div class="valid-feedback">
-                        Formato correcto.
-                    </div>
-                    <div class="invalid-feedback">
-                        Incorrecto, digite la cédula sin espacios y sin guiones.
-                    </div>
-                </div>
-
-
-                <div class="mb-3">
-                    <label for="contr">Contraseña</label>
-                    <input type="password" class="form-control" name="contrasena" id="contr" required>
-                    <div class="invalid-feedback">
-                        No puede dejar este campo vacío.
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-12 mb-3">
-                        <button class="btn btn-primary btn-lg col-12" type="submit">Iniciar Sesión</button>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
-</div>
 
 
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
-{% endblock %}
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+    <script src="static/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

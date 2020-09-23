@@ -15,8 +15,6 @@ def login():
 def login_post():
     cedula = request.form.get('cedula')
     password = request.form.get('contrasena')
-    #remember = True if request.form.get('remember') else False
-        
     user = Trabajador.query.filter_by(cedula = cedula).first()
 
     if user == None or not check_password_hash(user.contrasenia, password):
@@ -27,11 +25,11 @@ def login_post():
 
     return redirect(url_for('inicio.index'))
 
-@auth.route('/signup')
+@auth.route('/registrar-usuario')
 def signup():
     return render_template('signup.html')
 
-@auth.route('/signup', methods=['POST'])
+@auth.route('/registrar-usuario', methods=['POST'])
 def signup_post():
     cedula = request.form.get('cedula')
     name = request.form.get('name')
@@ -43,13 +41,13 @@ def signup_post():
         flash('Email address already exists.')
         return redirect(url_for('auth.signup'))
 
-    new_user = Trabajador(cedula=cedula, nombre=name, puesto= puesto, contrasenia=generate_password_hash(password, method='sha256'), estado = 'Activo')
+    new_user = Trabajador(cedula=cedula, nombre=name, puesto= puesto, contrasenia=c, estado = 'Activo')
     db.session.add(new_user)
     db.session.commit()
 
     return redirect(url_for('auth.login'))
 
-@auth.route('/logout')
+@auth.route('/cerrar-sesion')
 @login_required
 def logout():
     logout_user()

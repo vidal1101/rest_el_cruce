@@ -1,35 +1,35 @@
 /*
  * Script del inventario, están todos los procedimientos necesarios para el módulo.
  *
- * stp insertar producto       -> stp_insertarProducto
- * stp cambiar estado producto -> stp_cambiarEstadoProducto
- * stp modificar producto  	   -> stp_modificarProducto
- * stp mostrar producto por categoria -> stp_mostrarProductos_x_Categoria
- * stp mostrar producto 	   -> stp_mostrarProducto
+ * stp insertar producto       -> stp_insertarproducto
+ * stp cambiar estado producto -> stp_cambiarEstadoproducto
+ * stp modificar producto  	   -> stp_modificarproducto
+ * stp mostrar producto por categoria -> stp_mostrarproductos_x_categoria
+ * stp mostrar producto 	   -> stp_mostrarproducto
  *
  */
  
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarProductos_x_Categoria`(
-IN  $idCategoria INT)
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarproductos_x_categoria`(
+IN  $idcategoria INT)
 BEGIN
 
-IF EXISTS (SELECT idCategoria FROM `Categoria` WHERE idCategoria = $idCategoria) THEN
-	SELECT prod.idProducto, cat.nombreCate, prod.nombre, prod.precioCompra, prod.precioVenta, 
+IF EXISTS (SELECT idcategoria FROM `categoria` WHERE idcategoria = $idcategoria) THEN
+	SELECT prod.idproducto, cat.nombreCate, prod.nombre, prod.precioCompra, prod.precioVenta, 
     prod.utilidad, prod.iva, inv.stock, inv.cantMano, prod.descripcion, prod.estado
-		FROM `Producto` AS prod
-			INNER JOIN `Inventario` AS inv ON inv.idProducto = prod.idProducto 
-			INNER JOIN `Categoria` AS cat ON cat.idCategoria = prod.idCategoria
-		WHERE cat.idCategoria = $idCategoria;
+		FROM `producto` AS prod
+			INNER JOIN `inventario` AS inv ON inv.idproducto = prod.idproducto 
+			INNER JOIN `categoria` AS cat ON cat.idcategoria = prod.idcategoria
+		WHERE cat.idcategoria = $idcategoria;
 END IF;
 
 END //
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_insertarProducto`(
-IN $idProducto  INT,
-IN $idCategoria INT,
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_insertarproducto`(
+IN $idproducto  INT,
+IN $idcategoria INT,
 IN $nombre 		VARCHAR(50),
 IN $iva 		DOUBLE(10,2),
 IN $precioVenta DOUBLE(10,2), -- Solo se coloca el precio con que se desea vender al público.
@@ -38,23 +38,23 @@ IN $estado 		VARCHAR(25)
 -- OUT $mensaje VARCHAR(50)
 )
 BEGIN
-    IF NOT EXISTS (SELECT idProducto FROM `Producto` WHERE idProducto = $idProducto) THEN
+    IF NOT EXISTS (SELECT idproducto FROM `producto` WHERE idproducto = $idproducto) THEN
 		
-        INSERT INTO `Producto` (idProducto, idCategoria, nombre, precioVenta, iva,descripcion, estado)
-			VALUES ($idProducto, $idCategoria, $nombre, $precioVenta, $iva, $descripcion, $estado);
-		SELECT 'Producto registrado exitosamente.';
-        -- SET $mensaje = 'Producto registrado exitosamente.';
+        INSERT INTO `producto` (idproducto, idcategoria, nombre, precioVenta, iva,descripcion, estado)
+			VALUES ($idproducto, $idcategoria, $nombre, $precioVenta, $iva, $descripcion, $estado);
+		SELECT 'producto registrado exitosamente.';
+        -- SET $mensaje = 'producto registrado exitosamente.';
     ELSE
--- 		SET $mensaje = 'Producto con ID proporcionado ya ha sido registrado.';
-		SELECT 'Producto con ID proporcionado ya ha sido registrado.';
+-- 		SET $mensaje = 'producto con ID proporcionado ya ha sido registrado.';
+		SELECT 'producto con ID proporcionado ya ha sido registrado.';
     END IF;
 END $$
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_modificarProducto`(
-IN $idProducto  INT,
-IN $idCategoria INT,
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_modificarproducto`(
+IN $idproducto  INT,
+IN $idcategoria INT,
 IN $nombre 		VARCHAR(50),
 IN $iva 		DOUBLE(10,2),
 IN $precioVenta DOUBLE(10,2), -- Solo se coloca el precio con que se desea vender al público.
@@ -63,46 +63,46 @@ IN $estado 		VARCHAR(25)
 -- OUT $mensaje VARCHAR(50)
 )
 BEGIN
-    IF EXISTS (SELECT idProducto FROM `Producto` WHERE idProducto = $idProducto) THEN
+    IF EXISTS (SELECT idproducto FROM `producto` WHERE idproducto = $idproducto) THEN
 		
-        UPDATE `Producto` SET 
-						idCategoria = $idCategoria,
+        UPDATE `producto` SET 
+						idcategoria = $idcategoria,
                         nombre 		= $nombre,
                         precioVenta = $precioVenta,
                         iva			= $iva,
                         descripcion = $descripcion,
                         estado 		= $estado
-				WHERE idProducto    = $idProducto;
+				WHERE idproducto    = $idproducto;
             
-		SELECT 'Producto modificado exitosamente.';
-        -- SET $mensaje = 'Producto registrado exitosamente.';
+		SELECT 'producto modificado exitosamente.';
+        -- SET $mensaje = 'producto registrado exitosamente.';
     ELSE
--- 		SET $mensaje = 'Producto con ID proporcionado ya ha sido registrado.';
-		SELECT 'Producto con ID proporcionado no ha sido registrado.';
+-- 		SET $mensaje = 'producto con ID proporcionado ya ha sido registrado.';
+		SELECT 'producto con ID proporcionado no ha sido registrado.';
     END IF;
 END $$
 DELIMITER ;
 
 
 DELIMITER $$
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarProducto`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarproducto`(
 IN $idProd INT
 -- OUT $mensaje VARCHAR(50)
 )
 BEGIN
-	IF EXISTS(SELECT idProducto FROM `Producto` WHERE idProducto = $idProd) THEN
+	IF EXISTS(SELECT idproducto FROM `producto` WHERE idproducto = $idProd) THEN
     
-		SELECT idProducto, idCategoria, nombre, estado, precioCompra, precioVenta, iva, descripcion
-			FROM `Producto` WHERE idProducto = $idProd;
+		SELECT idproducto, idcategoria, nombre, estado, precioCompra, precioVenta, iva, descripcion
+			FROM `producto` WHERE idproducto = $idProd;
     ELSE
--- 		SET $mensaje = 'Producto no encontrado.';
-		SELECT 'Producto no encontrado.';
+-- 		SET $mensaje = 'producto no encontrado.';
+		SELECT 'producto no encontrado.';
     END IF;
 END $$
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_cambiarEstadoProducto`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_cambiarEstadoproducto`(
 IN  $idProd     INT
 -- OUT $mensaje 	VARCHAR(50),
 -- OUT $encontrado BOOLEAN
@@ -112,28 +112,28 @@ BEGIN
 DECLARE estadoActual VARCHAR(10);
 
 -- Verificamos si el registro existe y si existe obtenemos su campo estado
-		IF EXISTS (SELECT idProducto FROM `Producto` WHERE idProducto = $idProd) THEN
+		IF EXISTS (SELECT idproducto FROM `producto` WHERE idproducto = $idProd) THEN
 			
             -- Revisamos el estado actual del registro
-			SET estadoActual = (SELECT estado FROM `Producto` WHERE idProducto = $idProd);
+			SET estadoActual = (SELECT estado FROM `producto` WHERE idproducto = $idProd);
             
             -- Cambiamos el estado
             IF (estadoActual = 'Activo') THEN
             
 				SET estadoActual = 'Inactivo';
--- 				SET $mensaje     = 'Producto desactivado.';
+-- 				SET $mensaje     = 'producto desactivado.';
                 
             ELSE
 				SET estadoActual = 'Activo';
--- 				SET $mensaje     = 'Producto activado.';
+-- 				SET $mensaje     = 'producto activado.';
                 
             END IF;
 			
-            UPDATE `Producto` SET estado = estadoActual WHERE idProducto = $idProd;
+            UPDATE `producto` SET estado = estadoActual WHERE idproducto = $idProd;
 -- 			SET $encontrado = 1;
             
 -- 		ELSE
--- 			SET $mensaje    ='Error. Producto no encontrado.';
+-- 			SET $mensaje    ='Error. producto no encontrado.';
 -- 			SET $encontrado = 0;
 		END IF;
 END $$

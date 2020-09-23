@@ -57,8 +57,12 @@ CREATE TABLE IF NOT EXISTS `Bar_Rest_ElCruce`.`trabajador` (
   CONSTRAINT `chk_estadoTrab` CHECK (`estado` = 'Activo' OR `estado` = 'Inactivo'))
 ENGINE = InnoDB;
 
+INSERT INTO `trabajador`(cedula, nombre, puesto, contrasenia, estado) 
+  VALUES (12345, 'Leidy', 'administradora', 'sha256$t9oVp0kX$d6f585e8c919e6a74e9466d55360ce0edcd571985d19328d90481724bfe5999f',
+  'Activo');
+
 -- -----------------------------------------------------
--- Table `Bar_Rest_ElCruce`.`Cliente`
+-- Table `Bar_Rest_ElCruce`.`cliente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Bar_Rest_ElCruce`.`cliente` (
   `cedula`  VARCHAR(50) NOT NULL,
@@ -188,47 +192,47 @@ AUTO_INCREMENT = 100;
 CREATE TABLE IF NOT EXISTS `Bar_Rest_ElCruce`.`facturacliente` (
   `idFactura` 	   INT 			NOT NULL AUTO_INCREMENT,
   `idcaja` 		     INT 			NOT NULL,
-  `idCliente` 	   VARCHAR(50)  NOT NULL,
+  `idcliente` 	   VARCHAR(50)  NOT NULL,
   `idtrabajador`   INT 			NOT NULL,
   `lugarConsumo`   VARCHAR(10)  NOT NULL DEFAULT 'Barra',
-  `descripCliente` VARCHAR(50)  NOT NULL DEFAULT 'Cliente genérico',
+  `descripcliente` VARCHAR(50)  NOT NULL DEFAULT 'cliente genérico',
   `fechaProforma`  DATETIME 	NOT NULL DEFAULT NOW(), -- Este si agarra la fecha actual porque es primero una proforma
   `fechaFacturado` DATETIME 	NULL,
   `electronica`    TINYINT 		NOT NULL DEFAULT FALSE,
   `tipoPago` 	   VARCHAR(20)  NOT NULL DEFAULT 'Efectivo',
   `digitosTarjeta` INT(4) 		NULL, -- Puede ir NULL porque no siempre es con trajeta, son los últimos 4
   `estado` 		   VARCHAR(25)  NOT NULL DEFAULT 'Pendiente', -- Primero es proforma
-  `montCliente`    DOUBLE(10,2) NOT NULL DEFAULT 0,
+  `montcliente`    DOUBLE(10,2) NOT NULL DEFAULT 0,
   `diferencia` 	   DOUBLE(10,2) NOT NULL DEFAULT 0,
   `totalPago` 	   DOUBLE(10,2) NOT NULL DEFAULT 0,
   `moneda` 		   VARCHAR(10)  NOT NULL DEFAULT 'Colones',
   
   PRIMARY KEY (`idFactura`),
-  INDEX `FK_idCliente-FactCliente` 	  (`idCliente` ASC),
-  INDEX `FK_idtrabajador-FactCliente` (`idtrabajador` ASC),
-  INDEX `FK_idcaja-FactCliente`    	  (`idcaja` ASC),
+  INDEX `FK_idcliente-Factcliente` 	  (`idcliente` ASC),
+  INDEX `FK_idtrabajador-Factcliente` (`idtrabajador` ASC),
+  INDEX `FK_idcaja-Factcliente`    	  (`idcaja` ASC),
   
-  CONSTRAINT `chk_lugarConsumo-FactCliente`CHECK (`lugarConsumo` = 'Barra' OR `lugarConsumo` = 'Mesa'),
-  CONSTRAINT `chk_tipoPago-FactCliente`    CHECK (`tipoPago` = 'Efectivo'  OR `tipoPago` = 'Tarjeta'),
-  CONSTRAINT `chk_estado-FactCliente` 	   CHECK (`estado`   = 'Pendiente' OR `estado`   = 'Facturada'),
-  CONSTRAINT `chk_montCliente-FactCliente` CHECK (`montCliente` >= 0),
-  CONSTRAINT `chk_totalPago-FactCliente`   CHECK (`totalPago`   >= 0),
-  CONSTRAINT `chk_diferencia-FactCliente`  CHECK (`diferencia`  >= 0),
-  CONSTRAINT `chk_moneda-FactCliente` 	   CHECK (`moneda` = 'Colones' OR `moneda` = 'Dólares'),
+  CONSTRAINT `chk_lugarConsumo-Factcliente`CHECK (`lugarConsumo` = 'Barra' OR `lugarConsumo` = 'Mesa'),
+  CONSTRAINT `chk_tipoPago-Factcliente`    CHECK (`tipoPago` = 'Efectivo'  OR `tipoPago` = 'Tarjeta'),
+  CONSTRAINT `chk_estado-Factcliente` 	   CHECK (`estado`   = 'Pendiente' OR `estado`   = 'Facturada'),
+  CONSTRAINT `chk_montcliente-Factcliente` CHECK (`montcliente` >= 0),
+  CONSTRAINT `chk_totalPago-Factcliente`   CHECK (`totalPago`   >= 0),
+  CONSTRAINT `chk_diferencia-Factcliente`  CHECK (`diferencia`  >= 0),
+  CONSTRAINT `chk_moneda-Factcliente` 	   CHECK (`moneda` = 'Colones' OR `moneda` = 'Dólares'),
   
-  CONSTRAINT `FK_idCliente-FactCliente`
-    FOREIGN KEY (`idCliente`)
-    REFERENCES `Bar_Rest_ElCruce`.`Cliente` (`cedula`)
+  CONSTRAINT `FK_idcliente-Factcliente`
+    FOREIGN KEY (`idcliente`)
+    REFERENCES `Bar_Rest_ElCruce`.`cliente` (`cedula`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
     
-  CONSTRAINT `FK_idtrabajador-FactCliente`
+  CONSTRAINT `FK_idtrabajador-Factcliente`
     FOREIGN KEY (`idtrabajador`)
     REFERENCES `Bar_Rest_ElCruce`.`trabajador` (`cedula`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
     
-  CONSTRAINT `FK_idcaja-FactCliente`
+  CONSTRAINT `FK_idcaja-Factcliente`
     FOREIGN KEY (`idcaja`)
     REFERENCES `Bar_Rest_ElCruce`.`caja` (`idcaja`)
     ON DELETE RESTRICT
@@ -248,20 +252,20 @@ CREATE TABLE IF NOT EXISTS `Bar_Rest_ElCruce`.`detallecompracliente` (
   `subtotal` 		DOUBLE(10,2) NOT NULL DEFAULT 0,
   
   PRIMARY KEY (`idDetalleClient`),
-  INDEX `FK_idproducto-DetCompCliente` (`idproducto` ASC),
-  INDEX `FK_idFactura-DetCompCliente`  (`idFactura` ASC),
+  INDEX `FK_idproducto-DetCompcliente` (`idproducto` ASC),
+  INDEX `FK_idFactura-DetCompcliente`  (`idFactura` ASC),
   
-  CONSTRAINT `chk_precioVentas-DetCompCliente` CHECK (`precioVenta` >= 0),
-  CONSTRAINT `chk_cantConsumo-DetCompCliente`  CHECK (`cantConsumo` >  0), -- Nunca se consume 0 productos
-  CONSTRAINT `chk_subtotal-DetCompCliente`     CHECK (`subtotal`    >= 0),
+  CONSTRAINT `chk_precioVentas-DetCompcliente` CHECK (`precioVenta` >= 0),
+  CONSTRAINT `chk_cantConsumo-DetCompcliente`  CHECK (`cantConsumo` >  0), -- Nunca se consume 0 productos
+  CONSTRAINT `chk_subtotal-DetCompcliente`     CHECK (`subtotal`    >= 0),
   
-  CONSTRAINT `FK_idproducto-DetCompCliente`
+  CONSTRAINT `FK_idproducto-DetCompcliente`
     FOREIGN KEY (`idproducto`)
     REFERENCES `Bar_Rest_ElCruce`.`producto` (`idproducto`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
     
-  CONSTRAINT `FK_idFactura-DetCompCliente`
+  CONSTRAINT `FK_idFactura-DetCompcliente`
     FOREIGN KEY (`idFactura`)
     REFERENCES `Bar_Rest_ElCruce`.`facturacliente` (`idFactura`)
     ON DELETE RESTRICT

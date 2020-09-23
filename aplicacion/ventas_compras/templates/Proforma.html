@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="static/bootstrap-4.5.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/javascript-calculator-1/style.css">
+    <script src="static/jquery.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Proforma</title>
 
@@ -29,11 +30,13 @@
                 <a href="" class="btn btn-primary mr-2 mt-1 mb-2 rounded-pill float-right">Actualizar</a>
 
                 <!-- Botón que lanza la ventana para realizar el cobro -->
-                <button type="button" onclick="cargarModalFacturando()" class="btn btn-warning mr-2 mt-1 mb-2 rounded-pill" data-toggle="modal" data-target="#exampleModal">
-                Realizar Cobro
+                <button type="button" onclick="cargarModalFacturando()"
+                    class="btn btn-warning mr-2 mt-1 mb-2 rounded-pill">
+                    Realizar Cobro
                 </button>
 
-                <button href="" onclick="guardarProductos()" class="btn btn-success mr-2 mt-1 mb-2 rounded-pill float-left">Pagar</button>
+                <button href="" onclick="guardarProductos()"
+                    class="btn btn-success mr-2 mt-1 mb-2 rounded-pill float-left">Pagar</button>
                 <!--el btn swiht de color oscuro -->
                 <button class="switch" id="switch">
                     <span><i class="fas fa-sun"></i></span>
@@ -64,10 +67,13 @@
                 <br>
                 <div class="input-group mb-5">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><h2> Total ₡ :</h2> </span>
+                        <span class="input-group-text">
+                            <h2> Total ₡ :</h2>
+                        </span>
                     </div>
 
-                    <input type="number" style="font-size: 45px ;" id="totalApagar" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="0.0" readonly>
+                    <input type="number" style="font-size: 45px ;" id="totalApagar" class="form-control"
+                        aria-label="Amount (to the nearest dollar)" placeholder="0.0" readonly>
 
                 </div>
 
@@ -96,7 +102,8 @@
                                 <button type="button" class="btn btn-primary">Aceptar</button>
                             </div>
                             <div class="col-auto">
-                                <input type="text" id="myInput" class="form-control" placeholder="buscar producto " name="txtBusqueda" maxlength="50">
+                                <input type="text" id="myInput" class="form-control" placeholder="buscar producto "
+                                    name="txtBusqueda" maxlength="50">
                             </div>
                         </div>
                     </form>
@@ -121,12 +128,19 @@
                             <div id="cuerpoTabla">
                                 <tr>
 
-                                    <th scope="row"> <input style="font-size: 25px ;" class="form-control" id="colunma0" value="{{indice.0}}" readonly></th>
-                                    <td> <input style="font-size: 21px ;" class="form-control" id="colunma1" value="{{indice.1}}" readonly></td>
-                                    <td> <input style="font-size: 21px ;" class="form-control" id="colunma2" value="{{indice.2}}" readonly></td>
-                                    <td> <input style="font-size: 21px ;" class="form-control" id="colunma3" value="{{indice.3}}" readonly></td>
-                                    <td><input style="font-size: 21px ;" class="form-control" id="colunma4" value="{{indice.4}}" readonly></td>
-                                    <td><button id="btnAgregarP" onclick="btn( {{indice.0}},'{{indice.1}}' , '{{indice.2}}' ,{{indice.3}} )" class="btn btn-success">Agregar +</button></td>
+                                    <th scope="row"> <input style="font-size: 25px ;" class="form-control" id="colunma0"
+                                            value="{{indice.0}}" readonly></th>
+                                    <td> <input style="font-size: 21px ;" class="form-control" id="colunma1"
+                                            value="{{indice.1}}" readonly></td>
+                                    <td> <input style="font-size: 21px ;" class="form-control" id="colunma2"
+                                            value="{{indice.2}}" readonly></td>
+                                    <td> <input style="font-size: 21px ;" class="form-control" id="colunma3"
+                                            value="{{indice.3}}" readonly></td>
+                                    <td><input style="font-size: 21px ;" class="form-control" id="colunma4"
+                                            value="{{indice.4}}" readonly></td>
+                                    <td><button id="btnAgregarP"
+                                            onclick="btn( {{indice.0}},'{{indice.1}}' , '{{indice.2}}' ,{{indice.3}} )"
+                                            class="btn btn-success">Agregar +</button></td>
 
                                 </tr>
                             </div>
@@ -145,34 +159,38 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-cobrar" tabindex="-1" aria-labelledby="modal-cobrar" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h5 class="modal-title" id="exampleModalLabel">Proforma
+                    <h5 class="modal-title" id="modal-cobrar">Proforma
                         <span class="badge badge-secondary">#1</span>
                     </h5>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
 
-                        <h4 class="text-center mb-3"><span class="badge badge-primary">Sábado 12 septiembre 2020</span></h4>
+                        <h4 class="text-center mb-3"><span class="badge badge-primary">Sábado 12 septiembre 2020</span>
+                        </h4>
                         <!-- Medios de pago -->
                         <div class="row border-bottom">
 
                             <div class="col-2 mb-2">
                                 <label>Tipo de pago</label>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="efectivo" name="tipoPago" class="custom-control-input" value="efectivo" aria-expanded="true" aria-controls="collapse" checked>
+                                    <input type="radio" id="efectivo" name="tipoPago" class="custom-control-input"
+                                        value="efectivo" aria-expanded="true" aria-controls="collapse" checked>
                                     <label class="custom-control-label" for="efectivo">Efectivo</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="tarjeta" name="tipoPago" class="custom-control-input" value="tarjeta" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                                    <input type="radio" id="tarjeta" name="tipoPago" class="custom-control-input"
+                                        value="tarjeta" data-toggle="collapse" data-target="#collapse"
+                                        aria-expanded="false" aria-controls="collapse">
                                     <label class="custom-control-label" for="tarjeta">Tarjeta</label>
                                 </div>
                             </div>
@@ -180,7 +198,8 @@
                             <div class="col-4 border-right mb-2">
                                 <div class="collapse" id="collapse">
                                     <label for="numTarjeta">Últimos 4 dígitos de la tarjeta</label>
-                                    <input class="form-control" id="numeroTarjeta" type="number" maxlength="4" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
+                                    <input class="form-control" id="numeroTarjeta" type="number" maxlength="4"
+                                        oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
                                 </div>
                             </div>
 
@@ -192,7 +211,9 @@
 
                                 <div class="col-6 col-md-8 m-2">
 
-                                    <input type="number" id="cantidadDolares" oninput="cargarModalFacturando()" class="form-control" placeholder="0.0" min="0" maxlength="6" style="font-size: 24px ;">
+                                    <input type="number" id="cantidadDolares" oninput="cargarModalFacturando()"
+                                        class="form-control" placeholder="0.0" min="0" maxlength="6"
+                                        style="font-size: 24px ;">
                                 </div>
 
                             </div>
@@ -203,32 +224,40 @@
                                     <form>
 
                                         <div class="form-group row">
-                                            <label for="total-pagar" class="col-sm-4 col-form-label">Total a pagar: </label>
+                                            <label for="total-pagar" class="col-sm-4 col-form-label">Total a pagar:
+                                            </label>
                                             <div class="col-sm-8">
-                                                <input type="text" style="font-size: 26px ;" class="form-control" id="total-pagar" oninput="cargarModalFacturando()" value="¢ 0.00" readonly>
+                                                <input type="text" style="font-size: 26px ;" class="form-control"
+                                                    id="total-pagar" oninput="cargarModalFacturando()" value="¢ 0.00"
+                                                    readonly>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="paga-con" class="col-sm-4 col-form-label">Paga con ¢: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" style="font-size: 21px ;" class="form-control" id="paga-con" oninput="cargarModalFacturando()" value="¢ 0.00">
+                                                <input type="number" style="font-size: 21px ;" class="form-control"
+                                                    id="paga-con" oninput="cargarModalFacturando()" value="¢ 0.00">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="vuelto" class="col-sm-4 col-form-label">Vuelto: </label>
                                             <div class="col-sm-8">
-                                                <input type="text" style="font-size: 25px ;" class="form-control" id="vuelto" oninput="cargarModalFacturando()" value="¢ 0.00" readonly>
+                                                <input type="text" style="font-size: 25px ;" class="form-control"
+                                                    id="vuelto" oninput="cargarModalFacturando()" value="¢ 0.00"
+                                                    readonly>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="col-sm-10">
                                                 <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                                                    <input type="checkbox" class="custom-control-input" id="factura-electronica" name="factura-electronica" value="True">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        id="factura-electronica" name="factura-electronica"
+                                                        value="True">
                                                     <label class="custom-control-label" for="factura-electronica">
-                                                Solicita factura electrónica.
-                                            </label>
+                                                        Solicita factura electrónica.
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -257,7 +286,6 @@
         <script src="static/darkmodeJS/main.js"></script>
 
         <script src="static/javascript-calculator-1/main.js"></script>
-        <script src="static/bootstrap-4.5.0-dist/jquery-3.5.1.slim.min.js"></script>
         <script src="static/bootstrap-4.5.0-dist/popper.min.js"></script>
         <script src="static/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
         <script>
@@ -413,8 +441,6 @@
 
                         arrays[i].montoCliente = sumaPrecios;
                         arrays[i].canti = cantidad;
-
-
                     }
                 }
 
@@ -481,7 +507,26 @@
                 }
             }
 
+            /*
+                        pintar los datos en el modal correspondiente , para ca
+                         */
+            function cargarModalFacturando() {
 
+                var totalPagar = parseInt(document.getElementById("total-pagar").value) || 0,
+                    pagaCON = parseInt(document.getElementById("paga-con").value) || 0,
+                    totalProforma = parseInt(document.getElementById("totalApagar").value) || 0,
+                    CantiDolares = parseInt(document.getElementById("cantidadDolares").value) || 0,
+                    vuelto = parseInt(document.getElementById("vuelto").value) || 0;
+
+                //con un valor quemado del dolar 
+                var sumaDolares = 550 * CantiDolares;
+                var moneda = pagaCON - totalProforma + sumaDolares;
+
+                document.getElementById("total-pagar").value = totalProforma;
+                document.getElementById("vuelto").value = moneda;
+
+                $('#modal-cobrar').modal('show')
+            }
 
 
             /*hace la consulta asincrona a traves del protocolo http request 
@@ -494,21 +539,18 @@
                     url: '/guardarProforma',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(arrays),
-                    success: function(response) {
+                    success: function (response) {
                         // alert("Data added successfully");
                         alert(1024 * 1024 * 5 - unescape(encodeURIComponent(JSON.stringify(localStorage))).length);
                         // console.log(response);
                         // pintarResponseAjax(response);
                         document.addEventListener('DOMContentLoaded', pintarResponseAjax(response));
                     },
-                    error: function(error) {
+                    error: function (error) {
                         alert(error);
                     }
                 });
             }
-
-
-
 
             /*llama al arrays correspondiente en cada URLsearh verifica que no sea nulo para facturar a 
             traves de ajax 
@@ -527,29 +569,6 @@
 
 
 
-
-            /*
-            pintar los datos en el modal correspondiente , para ca
-             */
-            function cargarModalFacturando() {
-
-                var totalPagar = parseInt(document.getElementById("total-pagar").value) || 0,
-                    pagaCON = parseInt(document.getElementById("paga-con").value) || 0,
-                    totalProforma = parseInt(document.getElementById("totalApagar").value) || 0,
-                    CantiDolares = parseInt(document.getElementById("cantidadDolares").value) || 0,
-                    vuelto = parseInt(document.getElementById("vuelto").value) || 0;
-
-                //con un valor quemado del dolar 
-                var sumaDolares = 550 * CantiDolares;
-                var moneda = pagaCON - totalProforma + sumaDolares;
-
-                document.getElementById("total-pagar").value = totalProforma;
-                document.getElementById("vuelto").value = moneda;
-
-            }
-
-
-
             /* pinta todos  los productos y es llamado desde el DOM  para que actuali el template sin refrescar */
             const pintarProductos = () => {
                 //primero que se visualice vacio para no que no se vea el boceto basico 
@@ -564,13 +583,11 @@
                     }
                     arrays.push(cantidadProd)
                 } else {
-                    //arrays.forEach(Element => {
                     for (let i = 1; i < arrays.length; i++) {
                         //console.log(Element);
                         listaProductos.innerHTML += ` 
                                 <div class="card mb-3">
                                     <div class="card-body">
-                                        
                                             
                                         <Strong> #  ${arrays[i].idpro} ,   ${arrays[i].nombre} , Prec ₡:  ${arrays[i].precio}</Strong>
                                         <div class="row">
@@ -585,20 +602,13 @@
                                             </div>
                                             
                                         </div>
-                                               
-                                        
-                                            
-
                                     </div>
                                 </div>
                             `;
                     }
-                    sumarPrecioPloforma();
                 }
-
+                sumarPrecioPloforma();
             }
-
-
 
             //esccucha los eventos del DOM y pinta los productos sin recagar la pagina 
             document.addEventListener('DOMContentLoaded', pintarProductos);
@@ -608,19 +618,16 @@
 
 
         <script>
-            $(document).ready(function() {
-                $("#myInput").on("keyup", function() {
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
                     var value = $(this).val().toLowerCase();
-                    $("#myTable tr").filter(function() {
+                    $("#myTable tr").filter(function () {
                         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
                 });
             });
         </script>
-
-
-
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <!--script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script-->
 
 </body>
 

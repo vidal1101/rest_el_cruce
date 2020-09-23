@@ -1,14 +1,14 @@
 /*
- * Script de la tabla Trabajador
- * stp de insertar		     -> pa_insertarTrabajador
- * stp de cambiar estado	 -> pa_modificarTrabajador
- * stp de modificar 		 -> pa_cambiarEstadoTrabajador
- * stp de mostrar un usuario -> pa_mostrarTrabajador
+ * Script de la tabla trabajador
+ * stp de insertar		     -> pa_insertartrabajador
+ * stp de cambiar estado	 -> pa_modificartrabajador
+ * stp de modificar 		 -> pa_cambiarEstadotrabajador
+ * stp de mostrar un usuario -> pa_mostrartrabajador
  */
 
 -- spt de insertar
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_insertarTrabajador`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_insertartrabajador`(
 IN  $cedula     INT,
 IN  $nombre     VARCHAR(50),
 IN  $puesto     VARCHAR(45),
@@ -18,9 +18,9 @@ IN  $estado		VARCHAR(10)
 -- OUT $mensaje    VARCHAR(50)
 )
 BEGIN
-	IF NOT EXISTS (SELECT cedula FROM 	Trabajador WHERE cedula = $cedula) THEN
+	IF NOT EXISTS (SELECT cedula FROM 	trabajador WHERE cedula = $cedula) THEN
 		
-        INSERT INTO Trabajador (cedula,nombre,puesto,contrasenia,estado)
+        INSERT INTO trabajador (cedula,nombre,puesto,contrasenia,estado)
 			VALUES ($cedula, $nombre, $puesto, $contra, $estado);
 		
 -- 		SET $insertado = 1;
@@ -34,7 +34,7 @@ END //
 DELIMITER ;
 
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_modificarTrabajador`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_modificartrabajador`(
 IN  $cedula 	INT,
 IN  $nombre 	VARCHAR(50),
 IN  $puesto 	VARCHAR(45),
@@ -45,8 +45,8 @@ IN  $estado 	VARCHAR(10)
 )
 BEGIN
 
-	IF EXISTS (SELECT cedula FROM Trabajador WHERE cedula = $cedula) THEN
-		UPDATE Trabajador SET
+	IF EXISTS (SELECT cedula FROM trabajador WHERE cedula = $cedula) THEN
+		UPDATE trabajador SET
 			  nombre        = $nombre,
               puesto        = $puesto,
               contrasenia   = $contra,
@@ -64,7 +64,7 @@ DELIMITER ;
 
 -- Cambia el estado de un trabajador
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_cambiarEstadoTrabajador`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_cambiarEstadotrabajador`(
 IN  $ced 		INT
 -- OUT $encontrado BOOLEAN,
 -- OUT $mensaje 	VARCHAR(50)
@@ -75,10 +75,10 @@ BEGIN
 DECLARE estadoActual VARCHAR(10);
 
 -- Verificamos si el usuario existe y si existe obtenemos su estado
-		IF EXISTS (SELECT estado  FROM Trabajador WHERE cedula = $ced) THEN
+		IF EXISTS (SELECT estado  FROM trabajador WHERE cedula = $ced) THEN
 			
             -- Revisamos el estado actual del registro
-			SET estadoActual = (SELECT estado FROM Trabajador WHERE cedula = $ced);
+			SET estadoActual = (SELECT estado FROM trabajador WHERE cedula = $ced);
             
             -- Cambiamos el estado
             IF (estadoActual = 'Activo') THEN
@@ -93,7 +93,7 @@ DECLARE estadoActual VARCHAR(10);
                 
             END IF;
 			
-            UPDATE Trabajador SET estado = estadoActual WHERE cedula = $ced;
+            UPDATE trabajador SET estado = estadoActual WHERE cedula = $ced;
 -- 			SET $encontrado = 1;
             
 -- 		ELSE
@@ -105,14 +105,14 @@ DELIMITER ;
 
 -- Muestra los datos de un trabajador
 DELIMITER //
-CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarTrabajador`(
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrartrabajador`(
 IN  $ced     INT
 -- OUT $mensaje VARCHAR(50)
 )
 BEGIN
-	IF ((SELECT COUNT(cedula) FROM Trabajador WHERE cedula = $ced) > 0) THEN
+	IF ((SELECT COUNT(cedula) FROM trabajador WHERE cedula = $ced) > 0) THEN
     
-		SELECT cedula, nombre, puesto, estado FROM Trabajador WHERE cedula = $ced;
+		SELECT cedula, nombre, puesto, estado FROM trabajador WHERE cedula = $ced;
 --         SET $mensaje = 'Usuario encontrado';
 -- 	ELSE
 -- 		SET $mensaje = 'Error. Usuario no encontrado';
