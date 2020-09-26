@@ -218,3 +218,20 @@ BEGIN
 		order by pro.idProducto;
 END $$
 DELIMITER ;
+
+
+DELIMITER //
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarProductos_x_categoria_caja`(
+IN  $idcategoria INT)
+BEGIN
+
+IF EXISTS (SELECT idcategoria FROM `categoria` WHERE idcategoria = $idcategoria) THEN
+	SELECT pro.idProducto , cat.nombreCate , pro.nombre , pro.precioVenta, inv.stock
+		FROM `producto` AS pro
+			INNER JOIN `inventario` AS inv ON inv.idproducto = pro.idproducto 
+			INNER JOIN `categoria` AS cat ON cat.idcategoria = pro.idcategoria
+		WHERE cat.idcategoria = $idcategoria;
+END IF;
+
+END //
+DELIMITER ;

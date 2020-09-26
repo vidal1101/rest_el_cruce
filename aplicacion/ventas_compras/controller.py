@@ -7,10 +7,10 @@ def mostrarProductosCaja():
     return productos
 
 
-def muestraPrueba():
+def extraer_productos_categoria():
     conexion = Mysql()
-    #productos = conexion.call_store_procedure_return("stp_PruebaProductos", [])
-    return []    
+    productos = conexion.call_store_procedure_return("stp_mostrarProductos_x_categoria_caja", [2])
+    return productos   
 
 
 def generar_pdf():

@@ -8,14 +8,16 @@ def mostrar_proformas():
     return render_template('Mesas-Proformas.html')
 
 
-@proformas.route('/guardarProforma', methods=['POST'])
+@proformas.route('/obtener-productos', methods=['GET', 'POST'])
 @login_required
-def guardar_proforma(): 
-    productos = controller.muestraPrueba()
+def obtener_producto(): 
+    productos = controller.extraer_productos_categoria()
+    valores = request.get_json()
+    print(valores)
     response ={}
     for i in productos:
         response[str(i[0])]={'idproducto':i[0],'categoria':i[1],
-                             'nombre':i[2],'precio':i[3]}
+                             'nombre':i[2],'precio':i[3], 'stock':[4]}
     return json.dumps(response) 
 
 

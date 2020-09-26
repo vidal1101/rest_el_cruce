@@ -52,16 +52,6 @@
 
                 <div class="p-1 text-dark" id="listaProductos" style="height: 500px; Overflow-y:auto;">
                     <!-- Productos pedidos por la/el cliente. -->
-                    <ul class="list-group list-group-flush">
-
-                        <li class="list-group-item">Cras justo odio.
-                            <span class="float-right">
-                                <input type="number" id="comprado" value="0" min="0" size="4">
-                            </span>
-
-                        </li>
-
-                    </ul>
 
                 </div>
                 <br>
@@ -99,7 +89,8 @@
                                 </select>
                             </div>
                             <div class="col-auto my-1">
-                                <button type="button" class="btn btn-primary">Aceptar</button>
+                                <button type="button" class="btn btn-primary"
+                                    onclick="cargarProductos(pintarResponseAjax)">Aceptar</button>
                             </div>
                             <div class="col-auto">
                                 <input type="text" id="myInput" class="form-control" placeholder="buscar producto "
@@ -124,8 +115,9 @@
                         </thead>
 
                         <tbody id="myTable">
-                            {%for indice in productos%}
                             <div id="cuerpoTabla">
+                                {%for indice in productos%}
+
                                 <tr>
 
                                     <th scope="row"> <input style="font-size: 25px ;" class="form-control" id="colunma0"
@@ -143,8 +135,9 @@
                                             class="btn btn-success">Agregar +</button></td>
 
                                 </tr>
+
+                                {%endfor%}
                             </div>
-                            {%endfor%}
                         </tbody>
 
                     </table>
@@ -401,8 +394,9 @@
 
 
 
-            /* sumar los precios de la proforma que se encuntra para dar el monto total de la ploforma
-            para luego enviarlo como valor quemado en la opcion de pagar en la ventana modal 
+            /* 
+                Sumar los precios de la proforma que se encuntra para dar el monto total de la ploforma
+                para luego enviarlo como valor quemado en la opcion de pagar en la ventana modal 
              */
             function sumarPrecioPloforma() {
                 //  console.log(idproducto)
@@ -421,8 +415,9 @@
 
 
 
-            /*estoy en proces de calcular los montos por cada que se hace un cambio en los input de los
-            prodcuctos del cliente 
+            /*
+                En proceso de calcular los montos por cada que se hace un cambio en los input de los
+                productos del cliente.
              */
             function calcularMontos(idProduct, PrecioBase, idInput) {
 
@@ -451,16 +446,16 @@
 
 
 
-            /*pintar el response de la consulta de ajax .. se parsea la cedena de string y  se saca 
-            del diccionario  de python la key , valor correspondiente 
+            /*
+                Pintar el response de la consulta de ajax .. se parsea la cedena de string y  se saca 
+                del diccionario  de python la key , valor correspondiente 
              */
             const pintarResponseAjax = (response) => {
+
                 if (response != null) {
                     var idTabla = document.getElementById('tablaProductos');
 
-                    var idResponse = JSON.parse(response)
-
-                    document.getElementById('tablaProductos').innerHTML = `
+                    let nuevaTabla = `
                   <table class="table table-hover table-sm">
                         <thead class="thead-dark">
                             <tr>
@@ -476,34 +471,40 @@
                         <tbody id="myTable">
                 `;
 
+                    //document.getElementById('cuerpoTabla').innerHTML += ``;
+                    for (var k in response) {
 
-                    for (var k in idResponse) {
+                        var idpro = response[k]['idproducto']
+                        var nombre = response[k]['nombre']
+                        var cate = response[k]['categoria']
+                        var precio = response[k]['precio']
 
-                        var idpro = idResponse[k]['idproducto']
-                        var nombre = idResponse[k]['nombre']
-                        var cate = idResponse[k]['categoria']
-                        var precio = idResponse[k]['precio']
-                        console.log(idpro, cate, nombre, precio);
-
-                        document.getElementById('tablaProductos').innerHTML += `
-                    
+                        nuevaTabla += `
+                            
                             <tr>
 
-                                <th scope="row"> <input style="font-size: 25px ;" class="form-control" id="colunma0" value="${idpro}" readonly></th>
-                                <td> <input style="font-size: 21px ;" class="form-control" id="colunma1" value="${cate}" readonly></td>
-                                <td> <input style="font-size: 21px ;" class="form-control" id="colunma2" value="${nombre}" readonly></td>
-                                <td> <input style="font-size: 21px ;" class="form-control" id="colunma3" value="${precio}" readonly></td>
-                                <td><input style="font-size: 21px ;" class="form-control" id="colunma4" value="" readonly></td>
-                                <td><button id="btnAgregarP" onclick="btn( ${idpro}, '${cate}', '${nombre}' ,${precio})" class="btn btn-success">Agregar +</button></td>
+                                <th scope="row"> <input style="font-size: 25px ;" class="form-control" id="colunma0"
+                                        value="${idpro}" readonly></th>
+                                <td> <input style="font-size: 21px ;" class="form-control" id="colunma1"
+                                        value="${cate}" readonly></td>
+                                <td> <input style="font-size: 21px ;" class="form-control" id="colunma2"
+                                        value="${nombre}" readonly></td>
+                                <td> <input style="font-size: 21px ;" class="form-control" id="colunma3"
+                                        value="${precio}" readonly></td>
+                                <td><input style="font-size: 21px ;" class="form-control" id="colunma4"
+                                        value="--" readonly></td>
+                                <td><button id="btnAgregarP"
+                                        onclick="btn(  ${idpro}, '${cate}', '${nombre}' ,${precio} )"
+                                        class="btn btn-success">Agregar +</button></td>
 
-                            </tr>
-                     
-                    `;
+                            </tr>`;
 
                     }
-
-
-
+                    nuevaTabla += `
+                        </tbody>
+                        </table>
+                    `;
+                    document.getElementById('tablaProductos').innerHTML = nuevaTabla;
                 }
             }
 
@@ -532,28 +533,38 @@
             /*hace la consulta asincrona a traves del protocolo http request 
              envia los datos a la base de datos 
              */
-            function proformaAjax(arrays) {
+            async function cargarProductos(funcEjecutar) {
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/guardarProforma',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(arrays),
-                    success: function (response) {
-                        // alert("Data added successfully");
-                        alert(1024 * 1024 * 5 - unescape(encodeURIComponent(JSON.stringify(localStorage))).length);
-                        // console.log(response);
-                        // pintarResponseAjax(response);
-                        document.addEventListener('DOMContentLoaded', pintarResponseAjax(response));
+                let id = {
+                    id: '2'
+                };
+
+
+                let response = await fetch('/obtener-productos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
                     },
-                    error: function (error) {
-                        alert(error);
-                    }
+                    body: JSON.stringify(id)
                 });
+
+                if (response.ok) { // si el estado de la respuesta es 200
+
+                    let json = await response.json();
+                    console.log('Valor extraído, estado:', response.status);
+                    console.log(json)
+                    funcEjecutar(json);
+
+                } else if (response.status == 500) {
+                    swal("Oops", "Algo anda mal D: \n¡Revisa el servidor!" + response.status, "error");
+                } else {
+                    console.log('Advertencia, algo no anda bien pero funciona.');
+                }
             }
 
-            /*llama al arrays correspondiente en cada URLsearh verifica que no sea nulo para facturar a 
-            traves de ajax 
+            /*
+                Llama al arrays correspondiente en cada URLsearh verifica que no sea nulo para facturar a 
+                traves de ajax 
              */
             function guardarProductos() {
                 arrays = JSON.parse(localStorage.getItem(URLsearch));
