@@ -9,3 +9,6 @@ class Trabajador(UserMixin, db.Model):
     puesto = db.Column(db.String(45))
     contrasenia = db.Column(db.String)
     estado = db.Column(db.String(25))
+
+    def set_nombre(self, nombre):
+        self.nombre = nombre

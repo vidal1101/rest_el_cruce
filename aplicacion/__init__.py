@@ -4,7 +4,7 @@ from flask_login import LoginManager
 from .categorias import categorias
 from .inicio import inicio
 from .contabilidad import contabilidad
-from .usuarios import usuarios
+#from .usuarios import usuarios
 from .proveedores import proveedores
 from .clientes import clientes
 from .productos import productos
@@ -26,10 +26,11 @@ def create_app():
 
     from .usuarios.models import Trabajador
     @login_manager.user_loader
-    def load_user(user_id):
-        return Trabajador.query.get(int(user_id))
+    def load_user(user_cedula):
+        return Trabajador.query.get(int(user_cedula))
 
     from .usuarios.auth import auth as auth_blueprint
+    from .usuarios import usuarios
     app.register_blueprint(auth_blueprint)
 
 

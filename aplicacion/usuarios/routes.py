@@ -6,18 +6,13 @@ from . import usuarios, controller
 @login_required
 def  guardar_usuario():
     if(request.method == 'POST'):
-        try:
-            btnvalor = request.form['btnG']
-            print(btnvalor)        
-            if(btnvalor == 'editar'):
-                controller.modificar_usuario(request)
-            elif(btnvalor == 'guardar'):
-                controller.guardar_usuario(request)
-        except Exception :  # falta perfecionar esa pagina de errores 
-            error = 'Solicitud imcopleta, Faltan Datos '
-            ruta  = '/usuarios'
-            btn   = 'Volver a la lista de Usuarios'
-            return render_template('Errores.html', erro = error, rut = ruta, btn = btn)
+        btnvalor = request.form['btnG']
+        if(btnvalor == 'editar'):
+            resultado = controller.modificar_usuario(request)
+        elif(btnvalor == 'guardar'):
+            resultado = controller.guardar_usuario(request)
+        print(str(resultado))
+        return redirect('usuarios')
     return redirect('usuarios')
 
 

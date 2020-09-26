@@ -39,5 +39,3 @@ def generar_pdf():
     #canvas.wedge(x1,y1, x2,y2, startAng, extent, stroke=1, fill=0)
     #canvas.circle(x_cen, y_cen, r, stroke=1, fill=0)
     #canvas.roundRect(x, y, width, height, radius, stroke=1, fill=0) 
-
-generar_pdf()
