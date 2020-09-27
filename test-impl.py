@@ -1,3 +1,3 @@
-import os
+from aplicacion.ventas_compras.controller import generar_pdf
 
-print(os.getcwd())
+generar_pdf()

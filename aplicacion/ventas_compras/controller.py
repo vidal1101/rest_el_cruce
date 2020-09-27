@@ -17,16 +17,18 @@ def generar_pdf():
     # https://ricardogeek.com/como-crear-documentos-pdf-usando-python/
     # https://www.reportlab.com/docs/reportlab-userguide.pdf
     # https://www.tamanosdepapel.com/c-sobre-tamanos.htm
+
+    #160x230
     from reportlab.lib.pagesizes import C8
     from reportlab.pdfgen import canvas
 
     canvas = canvas.Canvas("impresion.pdf", pagesize=C8)
-    canvas.setLineWidth(.3)
-    canvas.setFont('Helvetica', 12)
+    canvas.setLineWidth(.2)
+    canvas.setFont('Times-Roman', 3)
 
-    canvas.drawString(30,750,'Restaurante el Cruce')
-    canvas.drawString(45,740,"27/10/2016")
-    canvas.line(36,737,110,737)
+    canvas.drawString(50,220,'BAR Y RESTAURANTE EL CRUCE')
+    canvas.line(1,115,160,115)
+    canvas.line(80,1,80,229)
     canvas.save()
     print('PDF creado!')
 

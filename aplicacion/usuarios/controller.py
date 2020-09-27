@@ -20,7 +20,7 @@ def guardar_usuario(request):
             if (usuario):
                 return 'cédula ya registrada'
             else:
-                nuevo_usuario = Trabajador(cedula=cedula, nombre=nombre, puesto = puesto, 
+                nuevo_usuario = Trabajador(cedula=cedula, nombre=nombre, puesto = puesto,
                     contrasenia=generate_password_hash(contra), estado = estado)
                 db.session.add(nuevo_usuario)
                 db.session.commit()
