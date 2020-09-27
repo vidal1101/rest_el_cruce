@@ -26,7 +26,7 @@ def generar_pdf():
     canvas.setLineWidth(.2)
     canvas.setFont('Times-Roman', 3)
 
-    canvas.drawString(50,220,'BAR Y RESTAURANTE EL CRUCE')
+    canvas.drawString(55,220,'BAR Y RESTAURANTE EL CRUCE')
     canvas.line(1,115,160,115)
     canvas.line(80,1,80,229)
     canvas.save()

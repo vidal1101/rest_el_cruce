@@ -34,3 +34,7 @@ def administrar_proforma():
 def realizar_compra():
     return render_template('Compra-Proveedor.html')
 
+
+@proformas.route('/factura', methods=['GET', 'POST'])
+def mostrar_factura():
+    return  render_template('factura.html')
