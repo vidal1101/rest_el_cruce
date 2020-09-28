@@ -1,20 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/bootstrap-4.5.0-dist/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Factura</title>
 </head>
+
 <body>
-    
-    <button type="button" onclick="window.print()">IMPRIMIR</button>
-<p>RESTAURANTE EL CRUCE</p>
-<br>
-<br>
-<p>Fecha: 26/09/2020</p>
-<br>
-<br>
-<p>------------------------</p>
-<P>Productos</P>
+
+    <button type="button" id="btn" class="btn btn-info m-1">IMPRIMIR FACTURA</button>
+
+    <div id="imprimir">
+        <div class="container-fluid">
+            <style>
+                p {
+                    font-size: 12px;
+                    font-weight: lighter;
+                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                }
+
+                .tabla {
+                    font-size: 12px;
+                }
+            </style>
+
+            <div class="row" id="encabezado">
+                <div class="col-12">
+                    <p class="text-center">RESTAURANTE EL CRUCE</p>
+                    <p class="text-center">Cédula jurídica: 1-50-0949</p>
+                    <p class="text-center">SARDINAL, CARRILLO, GUANACASTE</p>
+                    <p class="text-center">Teléfono: 8523-0004</p>
+
+                    <p class="izquierda">Tipo de Factura: Electrónica/Corriente</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <p class="izquierda float-left">No. Referencia: ********</p>
+                </div>
+                <div class="col-6">
+                    <p class="derecha float-right">26/09/2020</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <p>Tipo de pago: Contado</p>
+                    <p>Vendedor: Lady</p>
+                    <p>Cliente: Jordi ****</p>
+                    <p>NIT Clte: 999999999</p>
+                </div>
+            </div>
+
+            <p> --------------------------------------------------------------------------------------------------------------
+                --------------------------------------------------------------------------------------------------------------
+            </p>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-borderless table-sm tabla">
+                        <thead class="border">
+                            <tr>
+                                <th scope="col">CANT</th>
+                                <th scope="col">DESCRIPCION</th>
+                                <th scope="col">TOTAL ¢</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <th scope="row">9</th>
+                                <td>cerveza imperial light</td>
+                                <td>9000.00</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>alita a la bbq</td>
+                                <td>3800.00</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>cerveza imperial ultra</td>
+                                <td>1000.00</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        document.querySelector("#btn").addEventListener("click", function () {
+            var div = document.querySelector("#imprimir");
+            imprimirFactura(div);
+        });
+
+        function imprimirFactura(cuerpoFactura) {
+            var ventana = window.open('', 'PRINT', 'height=600,width=390');
+            ventana.document.write('<html><head><title>Factura</title>' +
+                '<meta charset="UTF-8">' +
+                '<link rel="stylesheet" href="static/bootstrap-4.5.0-dist/css/bootstrap.min.css">' +
+                '<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+            ventana.document.write('</head><body>');
+            ventana.document.write(cuerpoFactura.innerHTML);
+            ventana.document.write('</body></html>');
+            ventana.document.close();
+            ventana.focus();
+            //ventana.print();
+            //ventana.close();
+            //return true;
+        }
+    </script>
+
 </body>
+
 </html>
