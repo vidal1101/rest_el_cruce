@@ -1,6 +1,4 @@
-{% extends "Menu-Bar.html" %}
-{% block content %}
-{{ super() }}
+{% extends "Menu-Bar.html" %} {% block content %} {{ super() }}
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb col-6 col-md-3 mt-1 ml-2">
         <li class="breadcrumb-item"><a href="/">Menú principal</a></li>
@@ -13,182 +11,35 @@
     <h1 class="text-center mb-3">Centro de proformas</h1>
     <div class="row">
         <div class="col-6 border-right">
-
             <!-- Se abre un modal para añadir -->
-            <button type="button" class="btn btn-success float-right" data-toggle="modal" data-whatever="Barra"
-                data-target="#modal-cliente">
+            <button type="button" class="btn btn-success float-right" data-toggle="modal" data-whatever="Barra" data-target="#modal-cliente">
                 Añadir Barra
             </button>
             <h3 class="border-bottom"><span class="badge badge-dark">BARRA</span></h3>
 
-            <div style="Overflow-x:hidden; Overflow-y:auto; height: 470px;">
-                <div class="row">
+            <div style="overflow-x: hidden; overflow-y: auto; height: 470px">
+                <div id="generarBarra" class="row">
 
-                    <div class="col-6 mt-1">
-                        <div class="card">
-                            <div class="card-header text-white bg-info">
-                                Proforma <span class="badge badge-dark">#3</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title border-bottom">
-                                    <span class="badge badge-secondary">C:</span>
-                                    El de camisa Azul
-                                </h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                                <a href="administrar-proforma?id=100" class="btn btn-info">Ingresar</a>
-                            </div>
-                            <div class="card-footer text-muted">
-                                Total a pagar ¢ 52,000.00
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-6 mt-1">
-                        <div class="card">
-                            <div class="card-header text-white bg-info">
-                                Proforma <span class="badge badge-dark">#3</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title border-bottom">
-                                    <span class="badge badge-secondary">C:</span>
-                                    La muchacha de blusa verde
-                                </h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                                <a href="administrar-proforma?id=101" class="btn btn-info">Ingresar</a>
-                            </div>
-                            <div class="card-footer text-muted">
-                                Total a pagar ¢ 52,000.00
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-6 mt-1">
-                        <div class="card">
-                            <div class="card-header text-white bg-info">
-                                Proforma <span class="badge badge-dark">#3</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title border-bottom">
-                                    <span class="badge badge-secondary">C:</span>
-                                    El señor de sombrero
-                                </h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                                <a href="administrar-proforma?id=103" class="btn btn-info">Ingresar</a>
-                            </div>
-                            <div class="card-footer text-muted">
-                                Total a pagar ¢ 52,000.00
-                            </div>
-                        </div>
-                    </div>
+
 
                 </div>
             </div>
         </div>
 
-
         <div class="col-6 border-left">
-
-            <button type="button" class="btn btn-success float-right" data-toggle="modal" data-whatever="Mesa"
-                data-target="#modal-cliente">
+            <button type="button" class="btn btn-success float-right" data-toggle="modal" data-whatever="Mesa" data-target="#modal-cliente">
                 Añadir Mesa
             </button>
             <h3 class="border-bottom"><span class="badge badge-dark">MESAS</span></h3>
 
-            <div style="Overflow-x:hidden; Overflow-y:auto; height: 470px;">
-                <div class="row">
-                    <div class="col-6 mt-1">
-                        <div class="card">
-                            <div class="card-header text-white bg-success">
-                                Proforma <span class="badge badge-dark">#3</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title border-bottom">
-                                    <span class="badge badge-secondary">C:</span>
-                                    El de camisa Azul
-                                </h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                                <a href="administrar-proforma?id=110" class="btn btn-success">Ingresar</a>
-                            </div>
-                            <div class="card-footer text-muted">
-                                Total a pagar ¢ 52,000.00
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 mt-1">
-                        <div class="card">
-                            <div class="card-header text-white bg-success">
-                                Proforma <span class="badge badge-dark">#3</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title border-bottom">
-                                    <span class="badge badge-secondary">C:</span>
-                                    El de camisa Azul
-                                </h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                                <a href="administrar-proforma?id=104" class="btn btn-success">Ingresar</a>
-                            </div>
-                            <div class="card-footer text-muted">
-                                Total a pagar ¢ 52,000.00
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 mt-1">
-                        <div class="card">
-                            <div class="card-header text-white bg-success">
-                                Proforma <span class="badge badge-dark">#3</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title border-bottom">
-                                    <span class="badge badge-secondary">C:</span>
-                                    El de camisa Azul
-                                </h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                                <a href="administrar-proforma?id=107" class="btn btn-success">Ingresar</a>
-                            </div>
-                            <div class="card-footer text-muted">
-                                Total a pagar ¢ 52,000.00
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 mt-1">
-                        <div class="card">
-                            <div class="card-header text-white bg-success">
-                                Proforma <span class="badge badge-dark">#3</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title border-bottom">
-                                    <span class="badge badge-secondary">C:</span>
-                                    El de camisa Azul
-                                </h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.
-                                </p>
-                                <a href="administrar-proforma?id=109" class="btn btn-success">Ingresar</a>
-                            </div>
-                            <div class="card-footer text-muted">
-                                Total a pagar ¢ 52,000.00
-                            </div>
-                        </div>
-                    </div>
+            <div style="overflow-x: hidden; overflow-y: auto; height: 470px">
+                <div id="generarMesas" class="row">
 
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="modal fade" id="modal-cliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -204,32 +55,188 @@
                     <form>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Lugar de atención:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input readonly type="text" class="form-control" id="recipient-name" />
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                            <label for="message-text" class="col-form-label">descripción:</label>
+                            <textarea class="form-control" id="descrpcion" required></textarea>
                         </div>
-                    </form>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success">Guardar Proforma</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                Cancelar
+                            </button>
+                    <button type="button" data-dismiss="modal" onclick="datosProformas()" class="btn btn-success">
+                                Guardar Proforma
+                            </button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        $('#modal-cliente').on('show.bs.modal', function (event) {
+        $('#modal-cliente').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var recipient = button.data('whatever') // Extract info from data-* attributes
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
             modal.find('.modal-title').text('Nuevo cliente en ' + recipient)
             modal.find('.modal-body input').val(recipient)
         })
+
+        // variable de did content de mesas y barra
+        const proformaMesas = document.getElementById("generarMesas");
+        const proformasBarra = document.getElementById("generarBarra");
+
+        /* dibujar la proformas traidas desde la base de datos 
+         a traves del DOM , sin recargar la pagina */
+        async function dibujarClientesMesas() {
+
+            let response = await fetch('/dibujar-proformas', null);
+            if (response.ok) { // si el estado de la respuesta es 200
+                console.log(response.ok);
+
+                let json = await response.json();
+                console.log('Valor extraído, estado:', response.status);
+
+
+
+                if (Object.entries(json).length === 0) { // true si esta vacio y limpio el DOM
+                    console.log('json vacio ');
+                    proformaMesas.innerHTML = ``;
+                    proformasBarra.innerHTML = ``;
+                } else { // sino pinto la informacion del JSON 
+
+                    let NuevaProformaMesa = '';
+                    let NuevaProformaBarra = '';
+                    for (let k in json) {
+                        console.log(k);
+                        let idFactura = json[k]['idFactura']
+                        let idcaja = json[k]['idcaja']
+                        let descrip = json[k]['descrip']
+                        let idtrabaj = json[k]['idtrabajador']
+                        let lugarCons = json[k]['zona']
+                        let estado = json[k]['estado']
+
+                        if (lugarCons == 'Barra') {
+                            console.log('todos los servicios de barra');
+
+                            NuevaProformaBarra += `
+                             <div class="col-6 mt-1">
+                                        <div class="card" >
+                                        <div class="card-header text-white bg-info">
+                                            caja <span class="badge badge-dark"># ${idcaja}</span>
+                                             - Factura #: ${idFactura}
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title border-bottom">
+                                                <span class="badge badge-secondary">C:</span>
+                                               Descrpcion: ${descrip}
+                                            </h5>
+                                            <p class="card-text">
+                                                  Atendido por: ${idtrabaj}
+                                                  -  Zona: ${lugarCons}
+                                            </p>
+                                            <a href="administrar-proforma?id=${idFactura}" class="btn btn-info">Ingresar</a>
+                                        </div>
+                                        <div class="card-footer text-muted">
+                                                Estado Proforma : ${estado}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+
+                        } else {
+                            console.log('solo en mesa! ');
+                            NuevaProformaMesa += `
+                            <div class="col-6 mt-1">
+                                    <div class="card">
+                                    <div class="card-header text-white bg-success">
+                                        Caja  <span class="badge badge-dark"># ${idcaja}</span>
+                                        - Factura #: ${idFactura}
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title border-bottom">
+                                            <span class="badge badge-secondary">C:</span>
+                                        Descrpcion: ${descrip}
+                                        </h5>
+                                        <p class="card-text">
+                                            Atendido por: ${idtrabaj}
+                                        -  Zona: ${lugarCons}
+                                        </p>
+                                        <a href="administrar-proforma?id=${idFactura}" class="btn btn-success">Ingresar</a>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        Estado Proforma : ${estado}
+                                    </div>
+                                </div> 
+                            </div> 
+                                `;
+                        };
+
+                    };
+
+
+                    proformaMesas.innerHTML = NuevaProformaMesa;
+                    proformasBarra.innerHTML = NuevaProformaBarra;
+
+                }
+
+            } else if (response.status == 500) {
+                swal("Oops", "Algo anda mal D: \n¡Revisa el servidor!" + response.status, "error");
+            } else {
+                console.log('Advertencia, algo no anda bien pero funciona.');
+            }
+        };
+
+
+
+        /*recoge los datos del formulario y los envia a la base de datos 
+        y luego actualiza el DOM 
+        */
+        async function datosProformas() {
+            var consumo = document.getElementById("recipient-name").value,
+                descrip = document.getElementById("descrpcion").value;
+
+            let valoresProforma = { // creamos el diccionario
+                consu: consumo,
+                descr: descrip
+            };
+
+            document.getElementById("recipient-name").value = '';
+            document.getElementById("descrpcion").value = '';
+
+            let response = await fetch('/insertar-Proformas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(valoresProforma)
+            });
+
+
+            if (response.ok) { // si el estado de la respuesta es 200
+                console.log('despues de insertar');
+                console.log('Valor extraído, estado:', response.status)
+
+                // alerta de success
+
+            } else if (response.status == 500) {
+                swal("Datos Incompletos", "Falto la descripcion!!");
+            } else {
+                console.log('Advertencia, algo no anda bien pero funciona.');
+            }
+
+            dibujarClientesMesas();
+
+        };
+
+
+        document.addEventListener('DOMContentLoaded', dibujarClientesMesas());
     </script>
 
     {% endblock %}
+</div>

@@ -12,6 +12,16 @@ def extraer_productos_categoria():
     productos = conexion.call_store_procedure_return("stp_mostrarProductos_x_categoria_caja", [2])
     return productos   
 
+def insertarProformas(lugarConsumo,descripcion): #valores quemados
+    conexion = Mysql()
+    proformas = conexion.execute_procedure("stp_insertaProforma", [654321,12345,lugarConsumo,descripcion])
+   
+
+def mostrarProformas():  
+    conexion = Mysql()
+    proformasClientes = conexion.call_store_procedure_return("stp_mostrarFacturasClientes", [])
+    return proformasClientes 
+
 
 def generar_pdf():
     # https://ricardogeek.com/como-crear-documentos-pdf-usando-python/

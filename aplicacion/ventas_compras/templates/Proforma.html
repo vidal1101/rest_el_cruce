@@ -20,7 +20,9 @@
         <!-- Encabezado -->
         <div class="row bg-light fixed-top">
             <div class="col-6 float-left">
-                <h3 class="m-2"> Proforma <span class="badge badge-secondary">#1</span></h3>
+                <h3 class="m-2"> Proforma <span class="badge badge-secondary">
+                <input class="form-control" id="NumeroPloformAtendido" readonly>
+                </span></h3>
 
             </div>
             <div class="col-6">
@@ -292,8 +294,8 @@
             var URLsearch = window.location.search;
             //alert(URLsearch);
             console.log(URLsearch);
-
-
+            document.getElementById("NumeroPloformAtendido").value = URLsearch;
+            
             /* se llama al bonton de la tabla para añadir un nuevo producto  */
             function btn(idproducto, cate, nombre, precio) {
 

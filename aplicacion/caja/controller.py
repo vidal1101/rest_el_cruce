@@ -16,4 +16,4 @@ def verifica_estado_caja():
 #insertar nueva caja a usar 
 def insertarNuevaCaja(usuario,montoDolar,fondoCaja):
     conexion = Mysql()
-    conexion.execute_procedure("stp_abrirCaja", [usuario,montoDolar,fondoCaja])
+    conexion.execute_procedure("stp_abrirCaja", [12345,montoDolar,fondoCaja])

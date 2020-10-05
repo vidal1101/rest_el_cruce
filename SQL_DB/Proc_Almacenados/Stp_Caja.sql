@@ -235,3 +235,50 @@ END IF;
 
 END //
 DELIMITER ;
+
+
+delimiter $$
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_insertaProforma`(
+in $idCliente int(11),
+in $idTrabajador int(11),
+in $lugarConsumo varchar(10),
+in $descrip varchar(50)
+)
+BEGIN
+
+	DECLARE numUltimocaja int(11);
+    set numUltimocaja = (select max(idcaja) as num_caja   from caja );
+    
+    
+	insert into facturacliente( idcaja ,  idcliente , idtrabajador, 
+    lugarConsumo,descripcliente,fechaProforma,fechaFacturado,electronica,
+    tipoPago,digitosTarjeta,estado,montcliente,diferencia,totalPago,moneda)
+    values(numUltimocaja , $idCliente, $idTrabajador ,$lugarConsumo,
+    $descrip,now(),now(),0,'Efectivo',0,'pendiente',0,0,0,'colones');
+    
+    -- devuelve las facturas de clientes en estado pendiete de la caja abierta 
+    
+	select factclient.idcaja ,factclient.idtrabajador , factclient.lugarConsumo, 
+	factclient.descripcliente , factclient.estado
+	from facturacliente as factclient inner join caja as ca on factclient.idcaja = ca.idcaja
+	where factclient.estado = 'pendiente'  and factclient.idcaja = numUltimocaja ;
+    
+
+END$$
+delimiter ;
+
+
+delimiter $$
+CREATE DEFINER=`adminRestBar`@`localhost` PROCEDURE `stp_mostrarFacturasClientes`()
+BEGIN
+
+	DECLARE numUltimocaja int(11);
+    set numUltimocaja = (select max(idcaja) as num_caja   from caja );	
+    
+	select factclient.idcaja ,factclient.idtrabajador , factclient.lugarConsumo, 
+	 factclient.descripcliente , factclient.estado
+	 from facturacliente as factclient inner join caja as ca on factclient.idcaja = ca.idcaja
+	 where factclient.estado = 'pendiente'  and factclient.idcaja = numUltimocaja ;
+END$$
+delimiter ;
+
