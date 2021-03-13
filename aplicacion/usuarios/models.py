@@ -2,7 +2,7 @@ from flask_login import UserMixin
 from aplicacion import db
 
 class Trabajador(UserMixin, db.Model):
-    __tablename__ = 'Trabajador'
+    __tablename__ = 'trabajador'
     cedula = db.Column(db.Integer, primary_key=True)
     id = cedula
     nombre = db.Column(db.String(50))

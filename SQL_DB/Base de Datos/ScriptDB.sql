@@ -37,8 +37,8 @@ DROP TABLE IF EXISTS `detallecompraproveedor`;
 -- -----------------------------------------------------
 -- Crea el usuario y se le asigna los permisos a la BD
 -- -----------------------------------------------------
-CREATE USER IF NOT EXISTS `adminRestBar`@`localhost` IDENTIFIED BY 'Password!999';
-GRANT ALL PRIVILEGES ON `Bar_Rest_ElCruce`.* TO 'adminRestBar'@'localhost' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS `adminRestBar`@`%` IDENTIFIED BY 'Password!999';
+GRANT ALL PRIVILEGES ON `Bar_Rest_ElCruce`.* TO 'adminRestBar'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
 -- -----------------------------------------------------

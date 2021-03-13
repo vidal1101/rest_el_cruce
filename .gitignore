@@ -1,3 +1,5 @@
 env/
 entorno/
 flask-env/
+.vscode/
+__pycache__/

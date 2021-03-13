@@ -16,8 +16,6 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config/configuration.cfg')
-    app.config['SECRET_KEY'] = 'JKDHSUD883BDIUWGIEUIE8UY6Q3T239845GI5349U8P34VRGFD79WERFC3GY38RCIR623VCRHERTYERTY546RGC'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://adminRestBar:Password!999@127.0.0.1/Bar_Rest_ElCruce'
 
     db.init_app(app)
     login_manager = LoginManager()
